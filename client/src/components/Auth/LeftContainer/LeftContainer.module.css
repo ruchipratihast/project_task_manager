@@ -1,0 +1,30 @@
+.container {
+    width: 60vw;
+    height: 100vh;
+    padding: 6vw;
+    box-sizing: border-box;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #17A2B8;
+}
+
+img {
+    Width: 500px;
+    Height: 350px;
+}
+
+h1 {
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 33px;
+    margin: 20px 0px 5px 0px;
+}
+
+p{
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: 400;
+    font-size: 19px;
+}
