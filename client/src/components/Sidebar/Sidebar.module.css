@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+.container{
+    height: 100vh;
+    width: 15vw;
+    border-right: 1px solid #EDF5FE;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-left: 3vw;
+}
+
+.headingContainer{
+    display: flex;
+    margin: 12px 0px 8px 0px;
+}
+
+.logoImage{
+    height: 25px;
+    width: 25px;
+    margin: 5px;
+}
+
+.appName{
+    font-size: 16px;
+    font-weight: 700;
+    color: black;
+    margin: 5px;
+}
+
+.navbarName{
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    margin: 5px;
+}
+
+.logoutContainer{
+    display: flex;
+    margin-top: 52vh;
+    cursor: pointer;
+}
+
+.logoutImage{
+    height: 20px;
+    width: 20px;
+    margin: 5px;
+}
+
+.logoutName{
+    font-size: 16px;
+    font-weight: 500;
+    color: #CF3636;
+    margin: 5px;
+}

@@ -116,7 +116,7 @@ export default function RegisterComponent() {
       </button>
 
       <p className={styles.paragraph}>Have an account ?</p>
-      <button className={styles.blankbutton}>
+      <button onClick={()=>navigate('/login')} className={styles.blankbutton}>
         Log in
       </button>
 

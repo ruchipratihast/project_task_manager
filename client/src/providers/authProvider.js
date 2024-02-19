@@ -91,7 +91,8 @@ const AuthProvider = ({ children }) => {
             setToken(tkn);
 
             // set user too
-            setUser(JSON.parse(localStorage.getItem("user")));
+            // setUser(JSON.parse(localStorage.getItem("user")));
+            setUser(localStorage.getItem("user"));
         } else {
             setLogged(false);
             setLoading(false);
