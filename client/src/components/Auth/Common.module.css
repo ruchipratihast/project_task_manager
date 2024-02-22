@@ -10,7 +10,7 @@
 }
 
 .heading{
-    color:#343434;
+    color: var(--dark-grey-color);
     padding-bottom: 44.1px;
 }
 
@@ -26,7 +26,7 @@
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  color: #828282;
+  color: var(--light-grey-color);
   font-weight: 400;
   font-size: 20px;
 }
@@ -40,7 +40,7 @@
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  color: #828282;
+  color: var(--light-grey-color);
   font-weight: 400;
   cursor: pointer;
   font-size: 25px;
@@ -51,7 +51,7 @@
   height: 40px;
   font-size: 16px; 
   padding: 6px 6px 6px 35px;
-  border: 2px solid #D0D0D0;
+  border: 2px solid var(--input-field-border);
   border-radius: 8px;
 }
 
@@ -59,10 +59,10 @@
     width: 100%;
     padding: 8px;
     font-size: 20px;
-    background: #17A2B8;
+    background: var(--primary-color);
     border-radius: 25px;
     color: white;
-    border: 2px solid #17A2B8;
+    border: 2px solid var(--primary-color);
     font-weight: 500;
     cursor: pointer;
 }
@@ -71,9 +71,9 @@
     width: 100%;
     padding: 8px;
     font-size: 20px;
-    border: 2px solid #17A2B8;
+    border: 2px solid var(--primary-color);
     border-radius: 25px;
-    color: #17A2B8;
+    color: var(--primary-color);
     font-weight: 500;
     cursor: pointer;
     background-color: transparent;
@@ -81,7 +81,7 @@
 
 .paragraph{
     margin: 25px 25px;
-    color: #828282;
+    color: var(--light-grey-color);
     font-weight: 400;
     font-size: 19px;
     text-align: center;

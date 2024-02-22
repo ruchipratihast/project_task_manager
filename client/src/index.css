@@ -1,3 +1,13 @@
+:root {
+  --primary-color : #17A2B8;
+  --dark-grey-color : #343434;
+  --md-grey-color : #707070;
+  --light-grey-color : #828282;
+  --input-field-border: #D0D0D0;
+  --dark-red-color: #CF3636;
+
+}
+
 *{
   margin: 0;
   padding: 0;
@@ -6,4 +16,5 @@
 body {
   box-sizing: border-box;
   font-family: "Open Sans";
+  color: #000;
 }

@@ -7,21 +7,21 @@ import Home from './pages/Dashboard/Home';
 function App() {
   return (
     <>
-    <AuthProvider key='authprovider'> 
-      <BrowserRouter>
-        <Routes>
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/login' element={<LoginPage />} />
+      <AuthProvider key='authprovider'>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/register' element={<RegisterPage />} />
+            <Route path='/login' element={<LoginPage />} />
 
-          <Route element={<PrivateRoutes />}>
+            <Route element={<PrivateRoutes />}>
 
-              <Route path='/dashboard' element={<Home/>} />
+              <Route path='/dashboard' element={<Home />} />
 
-          </Route>
+            </Route>
 
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </>
   );
 }

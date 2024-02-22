@@ -6,11 +6,12 @@ export default function LeftContainerComponent() {
   return (
     <div className={styles.container}>
     <img
+      className= {styles.imageContainer}
       src={loginImage} 
       alt='login image'
      /> 
-     <h1>Welcome aboard my friend</h1>
-     <p>just a couple of clicks and we start</p>
+     <h1 className= {styles.welcomeHeading}>Welcome aboard my friend</h1>
+     <p className={styles.welcomeParagraph}>just a couple of clicks and we start</p>
     </div>
   )
 }

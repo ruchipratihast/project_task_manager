@@ -7,22 +7,22 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #17A2B8;
+    background-color: var(--primary-color);
 }
 
-img {
+.imageContainer {
     Width: 500px;
     Height: 350px;
 }
 
-h1 {
+.welcomeHeading {
     color: #FFFFFF;
     font-weight: 600;
     font-size: 33px;
     margin: 20px 0px 5px 0px;
 }
 
-p{
+.welcomeParagraph{
     color: #FFFFFF;
     text-align: center;
     font-weight: 400;
