@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+.container{
+    height: 37vw;
+    width: 20vw;
+    margin-left: 18px;
+    background-color: var(--section-bg-color);
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.headingContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.sectionName{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.collapseIcon{
+    color: var(--md-grey-color);
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}

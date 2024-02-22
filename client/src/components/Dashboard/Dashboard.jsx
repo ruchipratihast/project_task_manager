@@ -1,5 +1,9 @@
 import { React, useState } from 'react'
 import styles from './Dashboard.module.css'
+import Backlog from '../Sections/Backlog';
+import Todo from '../Sections/Todo';
+import InProgress from '../Sections/InProgress';
+import Done from '../Sections/Done';
 
 export default function Dashboard() {
   const [selectedOption, setSelectedOption] = useState('Today');
@@ -22,7 +26,7 @@ export default function Dashboard() {
         <p className={styles.headerP}>12th Jan 2024</p>
       </div>
 
-      <div className={styles.headerContainer}>
+      <div className={styles.childHeadContainer}>
         <h1 className={styles.boardName}>Board</h1>
         <select className={styles.dropdownContainer}>
           {options.map((option) => (
@@ -34,7 +38,10 @@ export default function Dashboard() {
       </div>
 
       <div className= {styles.sectionContainer}>
-
+       <Backlog />
+       <Todo />
+       <InProgress />
+       <Done />
       </div>
 
     </div>
