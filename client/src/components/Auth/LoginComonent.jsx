@@ -37,7 +37,7 @@ export default function LoginComonent() {
     if (res === "err") {
       alert("Invalid Credentials !");
   } else {
-      navigate('/dashboard');
+      navigate('/board');
   }
   };
 

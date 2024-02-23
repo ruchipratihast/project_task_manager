@@ -3,7 +3,10 @@ import RegisterPage from './pages/auth/RegisterPage';
 import LoginPage from './pages/auth/LoginPage';
 import AuthProvider from './providers/authProvider';
 import PrivateRoutes from './components/PrivateRoute';
-import Home from './pages/Dashboard/Home';
+import BoardPage from './pages/Dashboard/BoardPage';
+import AnalyticsPage from './pages/Dashboard/AnalyticsPage';
+import SettingsPage from './pages/Dashboard/SettingsPage';
+
 function App() {
   return (
     <>
@@ -15,7 +18,9 @@ function App() {
 
             <Route element={<PrivateRoutes />}>
 
-              <Route path='/dashboard' element={<Home />} />
+              <Route path='/board' element={<BoardPage />} />
+              <Route path='/analytics' element={<AnalyticsPage />} />
+              <Route path='/setting' element={<SettingsPage />} />
 
             </Route>
 

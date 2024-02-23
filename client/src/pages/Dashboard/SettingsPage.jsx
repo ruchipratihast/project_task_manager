@@ -1,12 +1,12 @@
 import React from 'react'
 import Sidebar from '../../components/Sidebar/Sidebar'
-import Dashboard from '../../components/Dashboard/Dashboard'
+import Settings from '../../components/Dashboard/Settings/Settings'
 
-export default function Home() {
+export default function SettingsPage() {
   return (
     <div style={{ display: 'flex'}}>
     <Sidebar />
-    <Dashboard />
+    <Settings />
    </div>
   )
 }
