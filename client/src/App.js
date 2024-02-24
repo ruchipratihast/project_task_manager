@@ -18,6 +18,7 @@ function App() {
 
             <Route element={<PrivateRoutes />}>
 
+              <Route path='/' element={<BoardPage />} />
               <Route path='/board' element={<BoardPage />} />
               <Route path='/analytics' element={<AnalyticsPage />} />
               <Route path='/setting' element={<SettingsPage />} />

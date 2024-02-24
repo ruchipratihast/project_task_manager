@@ -4,10 +4,10 @@ import LoginComonent from '../../components/Auth/LoginComonent'
 
 export default function LoginPage() {
   return (
-    <div style={{ display: 'flex'}}>
-    <LeftContainerComponent />
-    <LoginComonent />
-   </div>
+    <div style={{ display: 'flex' }}>
+      <LeftContainerComponent />
+      <LoginComonent />
+    </div>
   )
 }
 

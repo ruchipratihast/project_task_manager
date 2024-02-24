@@ -27,8 +27,9 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         try {
             var { data } = await axios.post(`${url}/register`, {
-                "username": email,
-                password,
+                name,
+                email,
+                password
             });
             axios.defaults.headers.common["Authorization"] = "Bearer " + token;
             console.log(data);
@@ -42,7 +43,7 @@ const AuthProvider = ({ children }) => {
             // console.log(data.user);
         } catch (error) {
             return "err";
-        } 
+        }
     }
 
     async function login(email, password) {
@@ -67,8 +68,8 @@ const AuthProvider = ({ children }) => {
         } catch (error) {
             console.log(error)
             return "err";
-        } 
-    } 
+        }
+    }
 
     // Call the logout endpoint and then remove the user
     // from the state.
@@ -98,7 +99,7 @@ const AuthProvider = ({ children }) => {
             setLoading(false);
             setToken(null);
         }
- 
+
 
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

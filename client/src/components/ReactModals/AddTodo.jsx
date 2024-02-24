@@ -3,6 +3,7 @@ import styles from './AddTodo.module.css';
 import deleteicon from "../../assets/icons/Delete.png";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useTasks } from '../../providers/taskProvider';
 
 export default function AddTodo({ closeModel }) {
     const [title, setTitle] = useState("");
@@ -11,12 +12,37 @@ export default function AddTodo({ closeModel }) {
     const [checklist, setChecklist] = useState([]);
     const [checkedChecklist, setCheckedChecklist] = useState([]);
 
+    const [todos, setTodos] = useState([]);
+
+    const { addTask } = useTasks();
+
+    const updateTodo = (index, name, checked) => {
+        if (index < 0 || index >= todos.length) {
+            return 'Invalid index';
+        }
+
+        const newTodos = [...todos];
+        newTodos[index] = { name, checked };
+        setTodos(newTodos);
+    };
+
+    const deleteTodo = (index) => {
+        if (index < 0 || index >= todos.length) {
+            return 'Invalid index';
+        }
+
+        const newTodos = [...todos];
+        newTodos.splice(index, 1);
+        setTodos(newTodos);
+    };
+
     const handleChange = (e) => {
         setTitle(e.target.value)
     }
 
     const handleAddChecklistItem = () => {
         setChecklist([...checklist, ""]);
+        setTodos([...todos, { name: '', checked: false }]);
     };
 
     const handleDeleteChecklistItem = (index) => {
@@ -38,9 +64,11 @@ export default function AddTodo({ closeModel }) {
             title,
             selectedPriority,
             dueDate,
-            checklist,
+            // checklist,
+            todos,
         };
 
+        addTask(title, dueDate, selectedPriority, todos);
         console.log(taskData)
     };
 
@@ -58,9 +86,9 @@ export default function AddTodo({ closeModel }) {
                         onChange={handleChange}
                         required={true}
                     />
-                    
+
                     <div className={styles.formGroupPriority}>
-                    <label>Select Priority <span style={{ color: '#FF0000' }}>*</span></label>
+                        <label>Select Priority <span style={{ color: '#FF0000' }}>*</span></label>
                         <div className={styles.priorityContainer}>
                             <div
                                 className={`${styles.priorityOption} ${selectedPriority === "HIGH PRIORITY" ? styles.selected : ""
@@ -99,13 +127,13 @@ export default function AddTodo({ closeModel }) {
                     </div>
 
                     {/* checklist */}
-                    <div className={styles.formGroupChecklist}>
+                    <div style={{ overflowY: 'auto', maxHeight: '30vh' }} className={styles.formGroupChecklist}>
                         <label>
-                            Checklist ({checkedChecklist.filter(Boolean).length}/
-                            {checklist.length})<span style={{ color: '#FF0000' }}> *</span>
+                            Checklist ({todos.filter(todo => todo.checked).length}/
+                            {todos.length})<span style={{ color: '#FF0000' }}> *</span>
                         </label>
                         <div>
-                            {checklist.map((item, index) => (
+                            {/* {checklist.map((item, index) => (
                                 <li key={index} className={styles.checklistitems}>
                                     <input
                                         type="checkbox"
@@ -130,7 +158,30 @@ export default function AddTodo({ closeModel }) {
                                         <img src={deleteicon} alt="delete" />
                                     </span>
                                 </li>
+                            ))} */}
+
+
+                            {todos.map((todo, index) => (
+                                <div key={index} className={styles.checklistitems}>
+                                    <input
+                                        type="checkbox"
+                                        checked={todo.checked}
+                                        onChange={(e) => updateTodo(index, todo.name, e.target.checked)}
+                                    />
+                                    <input
+                                        type="text"
+                                        value={todo.name}
+                                        onChange={(e) => updateTodo(index, e.target.value, todo.checked)}
+                                    />
+                                    <span
+                                        className={styles.deleteIcon}
+                                        onClick={() => deleteTodo(index)}
+                                    >
+                                        <img src={deleteicon} alt="delete" />
+                                    </span>
+                                </div>
                             ))}
+
 
                             <button onClick={handleAddChecklistItem} className={styles.addTodoButton}>
                                 <p className={styles.addNew}>

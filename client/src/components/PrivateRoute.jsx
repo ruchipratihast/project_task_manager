@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router";
 import { useAuth } from "../providers/authProvider";
 import React from "react";
+import TaskProvider from "../providers/taskProvider";
 
 export default function PrivateRoutes() {
     const { loading, logged } = useAuth();
@@ -14,7 +15,9 @@ export default function PrivateRoutes() {
     }
     return (
         logged ?
-            <Outlet />
+            <TaskProvider>
+                <Outlet />
+            </TaskProvider>
             : <Navigate to='/login' />
     )
 }

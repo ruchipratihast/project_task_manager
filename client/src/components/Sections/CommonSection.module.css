@@ -1,36 +1,37 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+}
 
-.container{
+.container {
     height: 80vh;
-    width: 20vw;
+    width: 350px !important;
     margin-left: 18px;
     background-color: var(--section-bg-color);
     border-radius: 12px;
     padding: 18px;
+    flex: 0 0 auto;
 }
 
-.headingContainer{
+.headingContainer {
     display: flex;
     justify-content: space-between;
 }
 
-.sectionName{
+.sectionName {
     font-size: 16px;
     font-weight: 500;
 }
 
-.collapseIcon{
+.collapseIcon {
     color: var(--md-grey-color);
     height: 20px;
     width: 20px;
     cursor: pointer;
 }
 
-.addButton{
+.addButton {
     background: none;
     border: none;
 }

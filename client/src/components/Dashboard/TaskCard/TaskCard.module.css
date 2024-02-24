@@ -1,0 +1,56 @@
+.card {
+    margin-top: 12px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.checkListHeader {
+    margin-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.caretButton {
+    box-sizing: border-box;
+    padding: 4px;
+    background-color: var(--section-bg-color);
+}
+
+.todoItem {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    border-radius: 12px;
+    border: 2px solid #717171;
+    padding: 6px 10px;
+}
+
+.todoItem>p {
+    margin-left: 8px;
+
+}
+
+.dateAndSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+}
+
+.sectionContainer {
+    display: flex;
+    align-items: center;
+
+}
+
+.sectionButton {
+    background: var(--section-bg-color);
+    padding: 4px;
+    font-size: 13px;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 6px;
+}

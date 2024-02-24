@@ -16,7 +16,7 @@
 
 .modalContainer {
     width: 550px;
-    height: 450px;
+    height: 60vh;
     border-radius: 12px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -54,9 +54,9 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 12px;
-  }
-  
-  .priorityOption {
+}
+
+.priorityOption {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -68,18 +68,18 @@
     font-weight: 500;
     color: var(--md-grey-color);
     margin-left: 1rem;
-  }
-  
-  .priorityDot {
+}
+
+.priorityDot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
     margin-right: 5px;
-  }
-  
-  .selected {
+}
+
+.selected {
     background-color: var(--selected-field-color);
-  }
+}
 
 .formGroupChecklist {
     display: flex;
@@ -118,7 +118,7 @@
     border-radius: 10px;
 }
 
-#checked{
+#checked {
     background-color: var(--primary-color);
 }
 
@@ -170,7 +170,7 @@
     border-radius: 12px;
     padding: 9px;
     cursor: pointer;
-  }
+}
 
 .cancelButton {
     width: 7.5rem;
@@ -197,8 +197,8 @@
     margin-left: 12px;
 }
 
-label{
+label {
     font-size: 16px;
     font-weight: 500;
     color: #20102B;
-  }
+}

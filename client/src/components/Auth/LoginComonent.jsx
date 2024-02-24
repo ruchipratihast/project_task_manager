@@ -6,6 +6,7 @@ import { MdLockOutline } from "react-icons/md";
 import { MdOutlineEmail } from "react-icons/md";
 import { useAuth } from '../../providers/authProvider';
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function LoginComonent() {
   const [showPassword, setShowPassword] = useState(false);
@@ -36,9 +37,9 @@ export default function LoginComonent() {
     var res = await login(data.email, data.password);
     if (res === "err") {
       alert("Invalid Credentials !");
-  } else {
+    } else {
       navigate('/board');
-  }
+    }
   };
 
   return (
@@ -78,9 +79,11 @@ export default function LoginComonent() {
       </button>
 
       <p className={styles.paragraph}>Have an account ?</p>
-      <button className={styles.blankbutton}>
-        Register
-      </button>
+      <Link style={{ display: 'block', width: '100%' }} to='/register'>
+        <button className={styles.blankbutton}>
+          Register
+        </button>
+      </Link>
 
     </div>
   )

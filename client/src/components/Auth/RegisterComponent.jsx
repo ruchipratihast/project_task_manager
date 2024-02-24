@@ -47,9 +47,9 @@ export default function RegisterComponent() {
     var res = await register(data.name, data.email, data.password);
     if (res === "err") {
       alert("Invalid Credentials !");
-  } else {
-      navigate('/customer');
-  }
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -116,7 +116,7 @@ export default function RegisterComponent() {
       </button>
 
       <p className={styles.paragraph}>Have an account ?</p>
-      <button onClick={()=>navigate('/login')} className={styles.blankbutton}>
+      <button onClick={() => navigate('/login')} className={styles.blankbutton}>
         Log in
       </button>
 
