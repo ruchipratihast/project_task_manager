@@ -1,8 +1,9 @@
 const Router = require("express").Router();
+const verifyJwt = require("./middlewares/authMiddleware");
 
 Router.get('/health', (req, res) => {
     res.json({
-        service: "job listing server",
+        service: "Pro Manage Server",
         status: "Active",
         time: new Date(),
     });
@@ -11,6 +12,12 @@ Router.get('/health', (req, res) => {
 //auth route
 Router.get("/register", require("./controllers/auth/register")); 
 Router.post("/login", require("./controllers/auth/login"));
+
+//task route
+// Router.get("/tasks", verifyJwt, require("./controllers/auth/register")); 
+Router.post("/task/create", verifyJwt, require("./controllers/tasks/create")); 
+Router.put("/task/edit/:taskId", verifyJwt, require("./controllers/tasks/update")); 
+// Router.delete("/task/edit/:taskId", verifyJwt, require("./controllers/auth/register")); 
 
 module.exports = Router;
 

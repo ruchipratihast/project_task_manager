@@ -10,12 +10,6 @@ module.exports = [
     async (req, res) => {
     try {
         const { email, password } = req.body;
-        //check for the fields that are required for login
-        if (!email || !password) {
-            return res.status(400).json({
-                error: "Bad Request",
-            });
-        }
 
         //check user or not
         const userDetails = await User.findOne({ email });
@@ -36,12 +30,12 @@ module.exports = [
                 .json({ error: "Invalid credentials" });
         }
 
-        const token = await jwt.sign(
+        const token =   jwt.sign(
             { userId: userDetails._id },
             process.env.JWT_SECRET
         );
         
-        return res.json({
+        return res.status(200).json({
             message: "User logged in successfully",
             token: token,
             name: userDetails.name,
