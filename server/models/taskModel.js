@@ -19,8 +19,8 @@ const taskSchema = new mongoose.Schema({
     section: {
         type: String,
         required: true,
-        enum: ['TODO', 'BACKLOG', 'PROGRESS', 'DONE'],
-        default: 'TODO'
+        enum: ['Todo', 'Backlog', 'In Progress', 'Done'],
+        default: 'Todo'
     },
 }, { timestamps: true }) // Track creation and update timestamps
 

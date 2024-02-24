@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "91bc9efd-4eb7-45e8-908e-a26a23017ed4",
+		"_postman_id": "32ab5cd7-e9d6-483b-b0fb-c9c40772944a",
 		"name": "Project Task Manager",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -8,6 +8,54 @@
 		{
 			"name": "auth",
 			"item": []
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Task With Todos 2\",\r\n    \"selectedPriority\": \"HIGH PRIORITY\",\r\n    \"dueDate\": null,\r\n    \"todos\": [\r\n        {\r\n            \"name\": \"asdasdasdasdasd\",\r\n            \"checked\": false\r\n        },\r\n        {\r\n            \"name\": \"asd\",\r\n            \"checked\": false\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/tasks",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/tasks",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
