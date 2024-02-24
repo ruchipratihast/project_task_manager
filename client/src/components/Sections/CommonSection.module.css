@@ -29,3 +29,8 @@
     width: 20px;
     cursor: pointer;
 }
+
+.addButton{
+    background: none;
+    border: none;
+}
