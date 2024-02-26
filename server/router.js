@@ -12,10 +12,9 @@ Router.get('/health', (req, res) => {
 //auth route
 Router.post("/register", require("./controllers/auth/register"));
 Router.post("/login", require("./controllers/auth/login"));
+Router.put("/update/:userId", verifyJwt, require("./controllers/auth/update"));
 
 //task route
-// Router.get("/tasks", verifyJwt, require("./controllers/auth/register")); 
-// Router.post("/task/create", verifyJwt, require("./controllers/tasks/create"));
 Router.get("/tasks", verifyJwt, require("./controllers/tasks/get"));
 Router.post("/tasks", verifyJwt, require("./controllers/tasks/create"));
 Router.put("/task/edit/:taskId", verifyJwt, require("./controllers/tasks/update"));

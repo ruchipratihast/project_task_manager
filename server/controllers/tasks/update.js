@@ -11,7 +11,6 @@ module.exports = [
 
     async (req, res) => {
         try {
-
             const taskId = req.params.taskId;
             const { title, priority, due_date, section, todos } = req.body;
 
