@@ -36,7 +36,6 @@ const TaskProvider = ({ children }) => {
                 });
             console.log(data);
             filterAndSetTasks(data);
-
             setLoading(false);
 
             // console.log(data.user);
@@ -44,7 +43,6 @@ const TaskProvider = ({ children }) => {
             return "err";
         }
     }
-
 
 
     async function addTask(title, dueDate, selectedPriority, todos) {
@@ -56,11 +54,8 @@ const TaskProvider = ({ children }) => {
                 selectedPriority,
                 todos
             });
-            console.log(data);
 
             setLoading(false);
-
-            console.log(data);
 
             // console.log(data.user);
         } catch (error) {

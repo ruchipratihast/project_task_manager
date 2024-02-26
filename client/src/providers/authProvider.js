@@ -55,7 +55,7 @@ const AuthProvider = ({ children }) => {
                 "password": password,
             });
             console.log(data)
-            // axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+            axios.defaults.headers.common["Authorization"] = "Bearer " + token;
             // console.log(data);
             setLogged(true);
             setToken(data.token);

@@ -6,6 +6,34 @@
     padding: 20px;
 }
 
+.priorityContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.priorityDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.priorityName{
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--md-grey-color);
+}
+
+.moreButton{
+    cursor: pointer;
+}
+
+.titleName{
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 700; 
+}
+
 .checkListHeader {
     margin-top: 14px;
     display: flex;
@@ -13,10 +41,23 @@
     align-items: center;
 }
 
-.caretButton {
+.checklistName{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.collapseButton {
     box-sizing: border-box;
     padding: 4px;
-    background-color: var(--section-bg-color);
+    background-color: var(--selected-field-color);
+    border-radius: 4px;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+}
+
+.collapseIcon{
+    color: var(--light-grey-color);
 }
 
 .todoItem {
@@ -24,7 +65,8 @@
     align-items: center;
     margin-top: 8px;
     border-radius: 12px;
-    border: 2px solid #717171;
+    border: 1px solid var(--modal-field-border);
+    font-weight: 400;
     padding: 6px 10px;
 }
 
@@ -47,10 +89,17 @@
 }
 
 .sectionButton {
-    background: var(--section-bg-color);
-    padding: 4px;
+    background: var(--selected-field-color);
+    padding: 4px 8px 4px 8px;
     font-size: 13px;
-    border-radius: 8px;
+    border-radius: 6px;
     text-align: center;
     margin-left: 6px;
+    cursor: pointer;
+}
+
+.sectionName{
+    color: var(--light-grey-color);
+    font-size: 10px;
+    font-weight: 500;
 }

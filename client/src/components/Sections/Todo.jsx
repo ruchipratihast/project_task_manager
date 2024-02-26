@@ -1,11 +1,20 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import styles from './CommonSection.module.css'
 import { VscCollapseAll } from "react-icons/vsc";
 import { IoMdAdd } from "react-icons/io";
 import AddTodo from '../ReactModals/AddTodo';
+import { useTasks } from '../../providers/taskProvider';
+import TaskCard from '../Dashboard/TaskCard/TaskCard';
 
 export default function Todo() {
   const [openAddTodo, setOpenAddTodo] = useState(false);
+
+  const { tasks, todo } = useTasks();
+
+  useEffect(() => {
+     console.log(todo);
+     console.log(tasks);
+  },[])
 
   return (
     <div className={styles.container}>
@@ -24,6 +33,18 @@ export default function Todo() {
         </div>
       </div>
       {openAddTodo ? <AddTodo closeModel={setOpenAddTodo} /> : <></>}
+
+      {todo.map((todo,i)=>{
+        return <TaskCard 
+                 key={i} 
+                 title={todo.title} 
+                 priority={todo.priority} 
+                 section={todo.section}
+                 date={todo.date}
+                 todos={todo.todos}
+                 />
+      })}
+
     </div>
   )
 }
