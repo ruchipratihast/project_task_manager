@@ -47,6 +47,7 @@ const TaskProvider = ({ children }) => {
 
     async function addTask(title, dueDate, selectedPriority, todos) {
         setLoading(true);
+        console.log(title, dueDate, selectedPriority, todos)
         try {
             var { data } = await axios.post(`${url}/tasks`, {
                 title,

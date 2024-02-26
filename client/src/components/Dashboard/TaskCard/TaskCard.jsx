@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './TaskCard.module.css'
 import { PiCaretDown, PiCaretUp } from "react-icons/pi";
 import { TfiMoreAlt } from "react-icons/tfi";
 
 export default function TaskCard({ title, priority, section, date, todos }) {
+
+    const [isPastDue, setIsPastDue] = useState(false);
 
     const priorityColor = {
         'LOW PRIORITY': '#63C05B',
@@ -11,6 +13,28 @@ export default function TaskCard({ title, priority, section, date, todos }) {
         'HIGH PRIORITY': '#FF2473',
     };
 
+    useEffect(() => {
+        const now = new Date();
+        const dueDateObj = new Date(date);
+     
+        setIsPastDue(dueDateObj < now);
+      }, [date]);
+
+    const formatDueDate = (dueDate) => {
+        // Create a new Date object from the ISO 8601 string
+        const date = new Date(dueDate);
+
+        // Get month name (lowercase) and date
+        const month = date.toLocaleString('default', { month: 'short' });
+        const day = date.getDate();
+
+        // Format the day with ordinal suffix (st, nd, rd, th)
+        const suffix = ['st', 'nd', 'rd'][Math.min(day % 10 - 1, 3)] || 'th';
+
+        // Return the formatted string
+        return `${month} ${day}${suffix}`;
+
+    }
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
@@ -37,16 +61,28 @@ export default function TaskCard({ title, priority, section, date, todos }) {
             </div>
             {isExpanded && todos.map((todo, idx) => {
                 return <div key={idx} className={styles.todoItem}>
-                    <input type="checkbox" checked={todo.checked} />
+                    <input 
+                    type="checkbox" 
+                    checked={todo.completed} 
+                    // style={{ 
+                    //     backgroundColor: todo.completed? '#17A2B8' : 'transparent' 
+                    //   }}
+                    disabled />
                     <p>{todo.todo}</p>
                 </div>
             })}
 
             <div className={styles.dateAndSection}>
-                {date ? <div>{date}</div> : <p></p>}
+                {date ? <div 
+                        className={`${styles.dueDateContainer} ${isPastDue ? styles.isPastDue : ""
+                    }`}
+                        >
+                    {formatDueDate(date)}
+                    </div> : <p></p>}
                 <div className={styles.sectionContainer}>
                     <div className={styles.sectionButton}><p className={styles.sectionName}>PROGRESS</p></div>
                     <div className={styles.sectionButton}><p className={styles.sectionName}>TODO</p></div>
+                    <div className={styles.sectionButton}><p className={styles.sectionName}>DONE</p></div>
                 </div>
             </div>
 

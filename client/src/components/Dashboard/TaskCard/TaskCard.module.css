@@ -82,6 +82,20 @@
     margin-top: 14px;
 }
 
+.dueDateContainer{
+    background-color: var(--input-field-border);
+    color: var(--md-grey-color);
+    padding: 2px 8px 2px 8px;
+    font-size: 13px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.isPastDue{
+    background-color: var( --dark-red-color);
+    color: white;
+}
+
 .sectionContainer {
     display: flex;
     align-items: center;

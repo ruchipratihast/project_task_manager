@@ -2,7 +2,7 @@ import { React, useEffect, useState } from 'react';
 import styles from './CommonSection.module.css'
 import { VscCollapseAll } from "react-icons/vsc";
 import { IoMdAdd } from "react-icons/io";
-import AddTodo from '../ReactModals/AddTodo';
+import AddTodo from '../ReactModals/AddTodo/AddTodo';
 import { useTasks } from '../../providers/taskProvider';
 import TaskCard from '../Dashboard/TaskCard/TaskCard';
 
@@ -12,9 +12,9 @@ export default function Todo() {
   const { tasks, todo } = useTasks();
 
   useEffect(() => {
-     console.log(todo);
-     console.log(tasks);
-  },[])
+    console.log(todo);
+    console.log(tasks);
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -34,17 +34,19 @@ export default function Todo() {
       </div>
       {openAddTodo ? <AddTodo closeModel={setOpenAddTodo} /> : <></>}
 
-      {todo.map((todo,i)=>{
-        return <TaskCard 
-                 key={i} 
-                 title={todo.title} 
-                 priority={todo.priority} 
-                 section={todo.section}
-                 date={todo.date}
-                 todos={todo.todos}
-                 />
-      })}
+      <div style={{ overflowY: 'auto', maxHeight: '72vh' }}>
+        {todo.map((todo, i) => {
+          return <TaskCard
+            key={i}
+            title={todo.title}
+            priority={todo.priority}
+            section={todo.section}
+            date={todo.due_date}
+            todos={todo.todos}
+          />
+        })}
 
+      </div>
     </div>
   )
 }

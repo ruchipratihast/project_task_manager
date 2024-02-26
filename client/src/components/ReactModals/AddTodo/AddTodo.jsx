@@ -1,9 +1,9 @@
 import { React, useState } from 'react';
 import styles from './AddTodo.module.css';
-import deleteicon from "../../assets/icons/Delete.png";
+import deleteicon from "../../../assets/icons/Delete.png";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useTasks } from '../../providers/taskProvider';
+import { useTasks } from '../../../providers/taskProvider';
 
 export default function AddTodo({ closeModel }) {
     const [title, setTitle] = useState("");
