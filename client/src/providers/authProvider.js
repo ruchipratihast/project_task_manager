@@ -54,9 +54,7 @@ const AuthProvider = ({ children }) => {
                 "email": email,
                 "password": password,
             });
-            console.log(data)
             axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-            // console.log(data);
             setLogged(true);
             setToken(data.token);
             setLoading(false);
@@ -71,13 +69,35 @@ const AuthProvider = ({ children }) => {
         }
     }
 
+    async function update(userId, newName, oldPassword, newPassword) {
+        setLoading(true);
+
+        try {
+            var { data } = await axios.put(`${url}/update/${userId}`, {
+                "newName": newName, 
+                "oldPassword": oldPassword, 
+                "newPassword": newPassword,
+
+                headers: {
+                    // Authorization: `Bearer ${token}`
+                    Authorization: token
+                }
+            });
+            console.log(data);
+            return data;
+         
+        } catch (error) {
+            console.log(error)
+            return error;
+        }
+    }
+
     // Call the logout endpoint and then remove the user
     // from the state.
     function logout() {
         setLogged(false);
         setLoading(false);
         setToken(null);
-        // sessionsApi.logout().then(() => setUser(undefined));
     }
 
     useEffect(() => {
@@ -112,6 +132,7 @@ const AuthProvider = ({ children }) => {
             user,
             register,
             login,
+            update,
             setToken,
             logout,
         }),

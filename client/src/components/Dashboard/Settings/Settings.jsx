@@ -3,10 +3,13 @@ import styles from './Settings.module.css'
 import { FaRegUser } from "react-icons/fa6";
 import { BiHide, BiShow } from "react-icons/bi";
 import { MdLockOutline } from "react-icons/md";
+import { useAuth } from '../../../providers/authProvider';
 
 export default function Settings() {
     const [showOldPassword, setShowOldPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
+
+    const {user, update } = useAuth();
 
     const [data, setData] = useState({
         name: "",
@@ -31,7 +34,8 @@ export default function Settings() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(data)
+        const res = await update(user._id, data.name, data.oldPassword, data.newPassword);
+        console.log(res)
     };
 
     return (

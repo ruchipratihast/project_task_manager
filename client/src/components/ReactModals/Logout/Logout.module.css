@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.modalBackground {
+    position: relative;
+    top: 40%;
+    left: 40%;
+    position: fixed;
+    display: fixed;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalContainer {
+    width: 300px;
+    height: 200px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.confirm{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.saveButton {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1.5px solid var(--primary-color);
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: var(--primary-color);
+}
+
+.cancelButton {
+    margin-top: 8px;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1.5px solid var(--dark-red-color);
+    border-radius: 12px;
+    color: var(--dark-red-color);
+    font-weight: 600;
+    cursor: pointer;
+    background-color: transparent;
+}

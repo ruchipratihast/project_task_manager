@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Sidebar.module.css'
 import logoImage from '../../assets/icons/logo.png'
 import logoutImage from '../../assets/icons/Logout.png'
 import { SidebarData } from './SidebarData'
 import { useNavigate } from 'react-router-dom'
+import Logout from '../ReactModals/Logout/Logout'
 
 export default function Sidebar() {
+  const [closeLogout, setcloseLogout] = useState(false);
   let Navigate = useNavigate();
 
   return (
@@ -37,12 +39,19 @@ export default function Sidebar() {
         </ul>
       </div>
 
-      <button className={styles.logouButton}>
+      <button 
+      onClick={() => {
+              setcloseLogout(true);
+            }} 
+      className={styles.logouButton}
+      >
         <div className={styles.logoutContainer}>
           <img src={logoutImage} className={styles.logoutImage} />
           <p className={styles.logoutName}>Log out</p>
         </div>
       </button>
+
+      {closeLogout ? <Logout closeLogout={setcloseLogout} /> : <></>}
 
     </div>
   )
