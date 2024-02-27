@@ -17,8 +17,8 @@ Router.put("/update/:userId", verifyJwt, require("./controllers/auth/update"));
 //task route
 Router.get("/tasks", verifyJwt, require("./controllers/tasks/get"));
 Router.post("/tasks", verifyJwt, require("./controllers/tasks/create"));
-Router.put("/task/edit/:taskId", verifyJwt, require("./controllers/tasks/update"));
-// Router.delete("/task/edit/:taskId", verifyJwt, require("./controllers/auth/register")); 
+// Router.put("/tasks/:taskId", verifyJwt, require("./controllers/tasks/update"));
+Router.delete("/tasks/:taskId", verifyJwt, require("./controllers/tasks/delete"));
 
 module.exports = Router;
 

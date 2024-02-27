@@ -37,7 +37,7 @@ module.exports = [
             res.status(200).json({ message: 'User Updated Successfully' });
         }
         catch (err) {
-            return res.status(500).json({ message: 'Error changing password' });
+            return res.status(500).json({ message: 'Error changing User Data' });
         }
     }
 ];
