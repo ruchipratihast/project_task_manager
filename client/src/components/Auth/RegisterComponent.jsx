@@ -6,11 +6,12 @@ import { MdLockOutline } from "react-icons/md";
 import { MdOutlineEmail } from "react-icons/md";
 import { useAuth } from '../../providers/authProvider';
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 export default function RegisterComponent() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [showconfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showconfirmPassword, setShowConfirmPassword] = useState(false); 
 
   const [data, setData] = useState({
     name: "",
@@ -43,13 +44,17 @@ export default function RegisterComponent() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(data)
-    var res = await register(data.name, data.email, data.password);
-    if (res === "err") {
-      alert("Invalid Credentials !");
-    } else {
-      navigate('/');
+    if (data.name == "" && data.email == "" && data.password == "") {
+      return toast.error("Please Fill all fields !");
     }
+
+    if (data.password !== confirmPassword) {
+      return toast.error("Passwords do not match !");
+    }
+    console.log(data)
+    await register(data.name, data.email, data.password);
+    navigate('/board')
+
   };
 
   return (

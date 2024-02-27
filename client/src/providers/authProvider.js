@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { url } from "../config";
+import { toast } from 'react-toastify';
 
 const AuthContext = createContext();
 
@@ -22,27 +23,26 @@ const AuthProvider = ({ children }) => {
     };
 
     async function register(name, email, password) {
-        console.log("register");
-        console.log(name, email);
         setLoading(true);
         try {
             var { data } = await axios.post(`${url}/register`, {
-                name,
-                email,
-                password
+                "name": name,
+                "email": email,
+                "password": password
             });
             axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-            console.log(data);
             setLogged(true);
             setToken(data.token);
             setLoading(false);
-            console.log(data.token);
             setUser(data.user);
             localStorage.setItem("user", JSON.stringify(data.user));
-            console.log(user);
-            // console.log(data.user);
+            toast.success("User registered successfully !");
         } catch (error) {
-            return "err";
+            if(error.response.status == 409)
+            { 
+                return toast.error("User Already Exist !");
+            }
+            return error;
         }
     }
 
@@ -58,14 +58,12 @@ const AuthProvider = ({ children }) => {
             setLogged(true);
             setToken(data.token);
             setLoading(false);
-            // console.log(data.token);
             setUser(data.user);
             localStorage.setItem("user", JSON.stringify(data.user));
-            console.log(user);
-            // console.log(data.user);
+            return toast.success("User login successfully !");
         } catch (error) {
             console.log(error)
-            return "err";
+            return toast.error("Invelid credentials!");
         }
     }
 
@@ -79,14 +77,21 @@ const AuthProvider = ({ children }) => {
                 "newPassword": newPassword,
 
                 headers: {
-                    // Authorization: `Bearer ${token}`
                     Authorization: token
                 }
             });
             console.log(data);
-            return data;
+            return toast.success("Updated successfully !");
          
         } catch (error) {
+            if(error.response.status == 400)
+            { 
+                return toast.error("Incorrect old password !");
+            }
+            if(error.response.status == 400)
+            { 
+                return toast.error("Incorrect old password !");
+            }
             console.log(error)
             return error;
         }

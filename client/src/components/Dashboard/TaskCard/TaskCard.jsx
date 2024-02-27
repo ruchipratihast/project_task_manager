@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import styles from './TaskCard.module.css'
 import { PiCaretDown, PiCaretUp } from "react-icons/pi";
 import { TfiMoreAlt } from "react-icons/tfi";
+import More from '../../ReactModals/More/More';
 
 export default function TaskCard({ title, priority, section, date, todos }) {
 
     const [isPastDue, setIsPastDue] = useState(false);
+    const [isMore, setIsMore] = useState(false);
 
     const priorityColor = {
         'LOW PRIORITY': '#63C05B',
@@ -48,7 +50,8 @@ export default function TaskCard({ title, priority, section, date, todos }) {
                     ></span>
                     <div className={styles.priorityName}>{priority}</div>
                 </div>
-                <TfiMoreAlt className={styles.moreButton} />
+                <TfiMoreAlt onClick={setIsMore(true)} className={styles.moreButton} />
+                {isMore ? <More closeMore = {setIsMore} /> : <></>}
             </div>
 
             <p className={styles.titleName}>{title}</p>

@@ -4,6 +4,7 @@ import deleteicon from "../../../assets/icons/Delete.png";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useTasks } from '../../../providers/taskProvider';
+import { toast } from 'react-toastify';
 
 export default function AddTodo({ closeModel }) {
     const [title, setTitle] = useState("");
@@ -44,21 +45,26 @@ export default function AddTodo({ closeModel }) {
         setTodos([...todos, { name: '', checked: false }]);
     };
 
-    // const handleDeleteChecklistItem = (index) => {
-    //     const updatedChecklist = [...checklist];
-    //     updatedChecklist.splice(index, 1);
-    //     setChecklist(updatedChecklist);
-    // };
-
-    // const handleCheckItem = (index) => {
-    //     const updatedCheckedChecklist = [...checkedChecklist];
-    //     updatedCheckedChecklist[index] = !updatedCheckedChecklist[index];
-    //     setCheckedChecklist(updatedCheckedChecklist);
-    // };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        addTask(title, dueDate, selectedPriority, todos);
+        if (title == "") {
+            return toast.error("Please add title!");
+        }
+
+        if (selectedPriority == "") {
+            return toast.error("Please select priority!");
+        }
+
+        if (todos.length == 0 ) {
+            return toast.error("Please add atleast one todo!");
+        }
+        if (todos[0].name == "") {
+            return toast.error("Please add todo!");
+        }
+        console.log(todos[0].name)
+        await addTask(title, dueDate, selectedPriority, todos);
+        toast.success("Task added successfully !");
+        closeModel(false);
     };
 
     return (
@@ -116,7 +122,7 @@ export default function AddTodo({ closeModel }) {
                     </div>
 
                     {/* checklist */}
-                    <div style={{ overflowY: 'auto', maxHeight: '26vh'}} className={styles.formGroupChecklist}>
+                    <div style={{ overflowY: 'auto', maxHeight: '26vh' }} className={styles.formGroupChecklist}>
                         <label>
                             Checklist ({todos.filter(todo => todo.checked).length}/
                             {todos.length})<span style={{ color: '#FF0000' }}> *</span>
@@ -132,7 +138,7 @@ export default function AddTodo({ closeModel }) {
                                     />
                                     <input
                                         type="text"
-                                        placeholder= "Add a task"
+                                        placeholder="Add a task"
                                         value={todo.name}
                                         onChange={(e) => updateTodo(index, e.target.value, todo.checked)}
                                     />

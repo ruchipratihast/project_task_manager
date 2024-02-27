@@ -6,6 +6,8 @@ import PrivateRoutes from './components/PrivateRoute';
 import BoardPage from './pages/Dashboard/BoardPage';
 import AnalyticsPage from './pages/Dashboard/AnalyticsPage';
 import SettingsPage from './pages/Dashboard/SettingsPage';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
 
           </Routes>
         </BrowserRouter>
+      <ToastContainer />
       </AuthProvider>
     </>
   );

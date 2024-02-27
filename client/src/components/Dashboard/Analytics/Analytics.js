@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './Analytics.module.css'
+import { useTasks } from '../../../providers/taskProvider'
 
 export default function Analytics() {
+  const { backlog, todo, inProgress, done } = useTasks();
+
   return (
     <div className={styles.container}>
       <h3 className={styles.heading}>Analytics</h3>
@@ -12,7 +15,7 @@ export default function Analytics() {
                 <div style={{ marginRight: '12px', marginTop:'5px', width: '12px', height: '12px', backgroundColor: '#90C4CC', borderRadius: '50%' }}></div>
                 <h3 className= {styles.contentName}>Backlog Tasks</h3>
               </div>
-              <h4>16</h4>
+              <h4>{backlog.length}</h4>
             </div>
 
             <div className={styles.content}>
@@ -20,7 +23,7 @@ export default function Analytics() {
                 <div style={{ marginRight: '12px', marginTop:'5px', width: '12px', height: '12px', backgroundColor: '#90C4CC', borderRadius: '50%' }}></div>
                 <h3 className= {styles.contentName}>To-do Tasks</h3>
               </div>
-              <h4>16</h4>
+              <h4>{todo.length}</h4>
             </div>
 
             <div className={styles.content}>
@@ -28,7 +31,7 @@ export default function Analytics() {
                 <div style={{ marginRight: '12px', marginTop:'5px', width: '12px', height: '12px', backgroundColor: '#90C4CC', borderRadius: '50%' }}></div>
                 <h3 className= {styles.contentName}>In-Progress Tasks</h3>
               </div>
-              <h4>16</h4>
+              <h4>{inProgress.length}</h4>
             </div>
 
             <div className={styles.content}>
@@ -36,7 +39,7 @@ export default function Analytics() {
                 <div style={{ marginRight: '12px', marginTop:'5px', width: '12px', height: '12px', backgroundColor: '#90C4CC', borderRadius: '50%' }}></div>
                 <h3 className= {styles.contentName}>Completed Tasks</h3>
               </div>
-              <h4>16</h4>
+              <h4>{done.length}</h4>
             </div>
         </div>
 

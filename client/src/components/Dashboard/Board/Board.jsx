@@ -1,12 +1,17 @@
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 import styles from './Board.module.css'
 import Backlog from '../../Sections/Backlog';
 import Todo from '../../Sections/Todo';
 import InProgress from '../../Sections/InProgress';
 import Done from '../../Sections/Done';
+import { useAuth } from "../../../providers/authProvider";
+import moment from 'moment';
 
 export default function Dashboard() {
+  const { user } = useAuth();
+
   const [selectedOption, setSelectedOption] = useState('Today');
+  const currentDate = moment().format('Do MMM, YYYY');
 
   const options = [
     { value: 'today', label: 'Today' },
@@ -22,8 +27,8 @@ export default function Dashboard() {
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
-        <h1 className={styles.headerH1}>Welcome Kumar</h1>
-        <p className={styles.headerP}>12th Jan 2024</p>
+        <h1 className={styles.headerH1}> Welcome! {user.name}</h1>
+        <p className={styles.headerP}>{currentDate}</p>
       </div>
 
       <div className={styles.childHeadContainer}>

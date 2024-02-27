@@ -4,6 +4,7 @@ import { FaRegUser } from "react-icons/fa6";
 import { BiHide, BiShow } from "react-icons/bi";
 import { MdLockOutline } from "react-icons/md";
 import { useAuth } from '../../../providers/authProvider';
+import { toast } from 'react-toastify';
 
 export default function Settings() {
     const [showOldPassword, setShowOldPassword] = useState(false);
@@ -12,7 +13,7 @@ export default function Settings() {
     const {user, update } = useAuth();
 
     const [data, setData] = useState({
-        name: "",
+        name: user.name,
         oldPassword: "",
         newPassword: "",
     })
@@ -34,8 +35,12 @@ export default function Settings() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const res = await update(user._id, data.name, data.oldPassword, data.newPassword);
-        console.log(res)
+        if(data.oldPassword != ""){
+            if(data.newPassword == "") {
+                return toast.error("Please enter new Password!");
+            }
+        }
+        await update(user._id, data.name, data.oldPassword, data.newPassword);
     };
 
     return (

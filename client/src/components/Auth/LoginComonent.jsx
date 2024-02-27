@@ -7,6 +7,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { useAuth } from '../../providers/authProvider';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function LoginComonent() {
   const [showPassword, setShowPassword] = useState(false);
@@ -33,13 +34,12 @@ export default function LoginComonent() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(data)
-    var res = await login(data.email, data.password);
-    if (res === "err") {
-      alert("Invalid Credentials !");
-    } else {
-      navigate('/board');
+    if (data.email == "" && data.password == "") {
+      toast.error("Please Fill all fields !");
+      return;
     }
+    await login(data.email, data.password);
+    navigate('/board')
   };
 
   return (
