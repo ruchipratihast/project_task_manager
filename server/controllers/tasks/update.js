@@ -1,51 +1,54 @@
+const { body } = require("express-validator");
+const { Task } = require("../../models/taskModel");
+const { Todo } = require("../../models/todoModel");
 
-// const { body } = require("express-validator");
-// const { Task } = require("../../models/taskModel");
-// const { Todo } = require("../../models/todoModel");
+module.exports = [
+    body("title").notEmpty().withMessage("Title is required"),
+    body("selectedPriority")
+        .notEmpty()
+        .withMessage("Selected Priority is required"),
+    body("todos").notEmpty().withMessage("Atleast one todo is required"),
 
-// module.exports = [
-//     body("title").notEmpty().withMessage("Title is required"),
-//     body("priority").notEmpty().withMessage().withMessage("Priority is required"),
-//     body("section").notEmpty().withMessage("Section is required"),
-//     body("todos").notEmpty().withMessage("Atleast one todo is required"),
+    async (req, res) => {
+        const  taskId  = req.params.taskId;
+        const { title, selectedPriority, dueDate, todos } = req.body;
 
-//     async (req, res) => {
-//         try {
-//             const taskId = req.params.taskId;
-//             const { itle, selectedPriority, dueDate, todos } = req.body;
+        try {
+            const updatedTask = await Task.findByIdAndUpdate(
+                taskId,
+                { $set: { title, selectedPriority, dueDate } },
+                { new: true }
+            );
 
-//             const taskfield = await Task.updateOne(
-//                 { _id: taskId },
-//                 {
-//                     $set: {
-//                         title,
-//                         priority,
-//                         due_date,
-//                         section,
-//                     },
-//                 }
-//             );
-//             console.log(taskfield);
+            if (!updatedTask) {
+                return res.status(404).json({ message: 'Task not found' });
+            }
 
-//             // Save the taskfield 
-//             try {
-//                 let id = taskfield._id;
-//                 let todosArr = [];
-//                 for (var t of todos) {
-//                     todosArr.push({
-//                         taskRef: id,
-//                         todo: t
-//                     });
-//                 }
-//                 Todo.updateMany(todosArr);
+            // Update todo
+            for (const todoData of todos) {
+                try {
+                    const updatedTodo = await Todo.findOneAndUpdate(
+                        { _id: todoData._id, "taskRef": taskId },
+                        {
+                            $set: {
+                                todo: todoData.name,
+                                completed: todoData.checked,
+                            }
+                        },
+                        { new: true }
+                    );
 
-//             } catch (error) {
-//                 return res.status(400).json({ "Error while updating task: ": err });
-//             }
-//             return res.status(200).json({ message: "Task updated successfully" });
-//         }
-//         catch (err) {
-//             res.status(500).json({ message: err });
-//         }
-//     },
-// ];
+                    if (!updatedTodo) {
+                        throw new Error("Todo not found");
+                    }
+                }
+                catch (err) {
+                    console.log(err);
+                }
+            }
+           return res.status(200).json(updatedTask);
+        } catch (err) {
+           return res.status(500).json({ message: "Internal server error" });
+        }
+    },
+];

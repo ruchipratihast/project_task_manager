@@ -48,18 +48,20 @@ const AuthProvider = ({ children }) => {
 
     async function login(email, password) {
         setLoading(true);
+        console.log(email, password)
 
         try {
             var { data } = await axios.post(`${url}/login`, {
                 "email": email,
                 "password": password,
             });
+            console.log(data)
             axios.defaults.headers.common["Authorization"] = "Bearer " + token;
             setLogged(true);
             setToken(data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
             setLoading(false);
             setUser(data.user);
-            localStorage.setItem("user", JSON.stringify(data.user));
             return toast.success("User login successfully !");
         } catch (error) {
             console.log(error)
@@ -67,7 +69,7 @@ const AuthProvider = ({ children }) => {
         }
     }
 
-    async function update(userId, newName, oldPassword, newPassword) {
+    async function updateSetting(userId, newName, oldPassword, newPassword) {
         setLoading(true);
 
         try {
@@ -75,9 +77,8 @@ const AuthProvider = ({ children }) => {
                 "newName": newName, 
                 "oldPassword": oldPassword, 
                 "newPassword": newPassword,
-
                 headers: {
-                    Authorization: token
+                    Authorization: `Bearer ${token}`
                 }
             });
             console.log(data);
@@ -117,7 +118,7 @@ const AuthProvider = ({ children }) => {
             setToken(tkn);
 
             // set user too
-            // setUser(JSON.parse(localStorage.getItem("user")));
+            setUser(JSON.parse(localStorage.getItem("user")));
             setUser(localStorage.getItem("user"));
         } else {
             setLogged(false);
@@ -137,7 +138,7 @@ const AuthProvider = ({ children }) => {
             user,
             register,
             login,
-            update,
+            updateSetting,
             setToken,
             logout,
         }),

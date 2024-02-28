@@ -15,9 +15,18 @@ export default function Backlog() {
         <VscCollapseAll className={styles.collapseIcon} />
       </div>
 
-      {backlog.map((task, idx) => {
-        return <TaskCard key={idx} title={task.title} priority={task.priority} section={task.section} date={task.date} todos={task.todos} />
-      })}
+      <div style={{ overflowY: 'auto', maxHeight: '72vh' }}>
+        {backlog.map((task, idx) => {
+          return <TaskCard
+            key={idx}
+            title={task.title}
+            priority={task.priority}
+            section={task.section}
+            date={task.due_date}
+            todos={task.todos}
+          />
+        })}
+      </div>
     </div>
   )
 }

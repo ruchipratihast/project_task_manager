@@ -9,12 +9,7 @@ import TaskCard from '../Dashboard/TaskCard/TaskCard';
 export default function Todo() {
   const [openAddTodo, setOpenAddTodo] = useState(false);
 
-  const { tasks, todo } = useTasks();
-
-  useEffect(() => {
-    console.log(todo);
-    console.log(tasks);
-  }, [])
+  const { todo } = useTasks();
 
   return (
     <div className={styles.container}>
@@ -35,14 +30,14 @@ export default function Todo() {
       {openAddTodo ? <AddTodo closeModel={setOpenAddTodo} /> : <></>}
 
       <div style={{ overflowY: 'auto', maxHeight: '72vh' }}>
-        {todo.map((todo, i) => {
+        {todo.map((task, i) => {
           return <TaskCard
             key={i}
-            title={todo.title}
-            priority={todo.priority}
-            section={todo.section}
-            date={todo.due_date}
-            todos={todo.todos}
+            title={task.title}
+            priority={task.priority}
+            section={task.section}
+            date={task.due_date}
+            todos={task.todos}
           />
         })}
 

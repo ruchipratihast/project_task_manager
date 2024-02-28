@@ -6,7 +6,6 @@ const { Todo } = require("../../models/todoModel");
 module.exports = [
     body("title").notEmpty().withMessage("Title is required"),
     body("selectedPriority").notEmpty().withMessage().withMessage("Selected Priority is required"),
-    body("dueDate").notEmpty().withMessage("Due Date is required"),
     body("todos").notEmpty().withMessage("Atleast one todo is required"),
 
     async (req, res) => {

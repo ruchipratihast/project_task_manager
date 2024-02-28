@@ -10,7 +10,7 @@ export default function Settings() {
     const [showOldPassword, setShowOldPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
 
-    const {user, update } = useAuth();
+    const {user, updateSetting } = useAuth();
 
     const [data, setData] = useState({
         name: user.name,
@@ -40,7 +40,7 @@ export default function Settings() {
                 return toast.error("Please enter new Password!");
             }
         }
-        await update(user._id, data.name, data.oldPassword, data.newPassword);
+        await updateSetting(user._id, data.name, data.oldPassword, data.newPassword);
     };
 
     return (

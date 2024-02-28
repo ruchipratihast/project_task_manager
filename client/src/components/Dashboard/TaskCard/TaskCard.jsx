@@ -20,7 +20,7 @@ export default function TaskCard({ title, priority, section, date, todos }) {
         const dueDateObj = new Date(date);
      
         setIsPastDue(dueDateObj < now);
-      }, [date]);
+      }, []);
 
     const formatDueDate = (dueDate) => {
         // Create a new Date object from the ISO 8601 string
@@ -50,7 +50,7 @@ export default function TaskCard({ title, priority, section, date, todos }) {
                     ></span>
                     <div className={styles.priorityName}>{priority}</div>
                 </div>
-                <TfiMoreAlt onClick={setIsMore(true)} className={styles.moreButton} />
+                <TfiMoreAlt onClick={() => setIsMore(true)} className={styles.moreButton} />
                 {isMore ? <More closeMore = {setIsMore} /> : <></>}
             </div>
 
@@ -92,3 +92,5 @@ export default function TaskCard({ title, priority, section, date, todos }) {
         </div>
     )
 }
+
+
