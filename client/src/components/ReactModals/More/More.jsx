@@ -1,25 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './More.module.css'
 import { useAuth } from '../../../providers/authProvider';
 import { useTasks } from '../../../providers/taskProvider';
-import { toast } from 'react-toastify';
+import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
 
-export default function More({ closeMore }) {
+export default function More({ closeMore, id }) {
+    const [isDelete, setIsDelete] = useState(false);
     const { user } = useAuth();
     const { deleteTask } = useTasks();
 
-    const handleDelete = () => {
-        
-    };
-
     return (
-        <div className= {styles.modalBackground}>
-            <div className= {styles.modalContainer}>
-                <button><p className= {styles.confirm}>Edit</p></button>
-                <button><p className= {styles.confirm}>Share</p></button>
-                <button onClick={handleDelete}><p className= {styles.confirm}>Delete</p></button>
+        <>
+            <div className={styles.modalBackground}>
+                <div className={styles.modalContainer}>
+                    <div className={styles.rowContainer}>
+                        <button className={styles.actionButton}><p className={styles.actionName}>Edit</p></button>
+                        <button className={`${styles.actionButton} ${styles.crossButton}`} onClick={() => closeMore(false)}><p className={styles.actionName}>☓</p></button>
+                    </div>
+                    <button className={styles.actionButton}><p className={styles.actionName}>Share</p></button>
+                    <button className={styles.actionButton}
+                        onClick={() => setIsDelete(true)}
+                    >
+                        <p className={styles.delete}>Delete</p>
+                    </button>
+                </div>
             </div>
-        </div>
+            {isDelete ? <ConfirmDelete closeMore={closeMore} closeDelete={setIsDelete} id={id} /> : <></>}
+        </>
     )
 }
 

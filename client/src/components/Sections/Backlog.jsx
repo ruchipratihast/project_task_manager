@@ -7,7 +7,6 @@ import TaskCard from '../Dashboard/TaskCard/TaskCard';
 export default function Backlog() {
 
   const { backlog } = useTasks();
-
   return (
     <div className={styles.container}>
       <div className={styles.headingContainer}>

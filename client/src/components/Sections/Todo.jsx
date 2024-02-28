@@ -33,6 +33,7 @@ export default function Todo() {
         {todo.map((task, i) => {
           return <TaskCard
             key={i}
+            id={task._id}
             title={task.title}
             priority={task.priority}
             section={task.section}

@@ -6,7 +6,7 @@
     padding: 20px;
 }
 
-.priorityContainer{
+.priorityContainer {
     display: flex;
     justify-content: space-between;
 }
@@ -18,20 +18,20 @@
     margin-right: 5px;
 }
 
-.priorityName{
+.priorityName {
     font-size: 9px;
     font-weight: 500;
     color: var(--md-grey-color);
 }
 
-.moreButton{
+.moreButton {
     cursor: pointer;
 }
 
-.titleName{
+.titleName {
     margin-top: 10px;
     font-size: 18px;
-    font-weight: 700; 
+    font-weight: 700;
 }
 
 .checkListHeader {
@@ -41,7 +41,7 @@
     align-items: center;
 }
 
-.checklistName{
+.checklistName {
     font-size: 16px;
     font-weight: 500;
 }
@@ -56,7 +56,7 @@
     cursor: pointer;
 }
 
-.collapseIcon{
+.collapseIcon {
     color: var(--light-grey-color);
 }
 
@@ -82,7 +82,7 @@
     margin-top: 14px;
 }
 
-.dueDateContainer{
+.dueDateContainer {
     background-color: var(--input-field-border);
     color: var(--md-grey-color);
     padding: 2px 8px 2px 8px;
@@ -91,8 +91,13 @@
     text-align: center;
 }
 
-.isPastDue{
-    background-color: var( --dark-red-color);
+.isPastDue {
+    background-color: var(--dark-red-color);
+    color: white;
+}
+
+.isDone {
+    background-color: #63C05B;
     color: white;
 }
 
@@ -112,7 +117,7 @@
     cursor: pointer;
 }
 
-.sectionName{
+.sectionName {
     color: var(--light-grey-color);
     font-size: 10px;
     font-weight: 500;

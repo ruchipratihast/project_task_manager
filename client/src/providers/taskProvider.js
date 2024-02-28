@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { url } from "../config";
 import { useAuth } from "./authProvider";
+import { toast } from 'react-toastify';
 
 const TaskContext = createContext();
 
@@ -15,6 +16,12 @@ const TaskProvider = ({ children }) => {
     const [inProgress, setInProgress] = useState([]);
     const [done, setDone] = useState([]);
 
+    const [lowPriority, setLowPriority] = useState(0);
+    const [highPriority, setHighPriority] = useState(0);
+    const [moderatePriority, setModeratePriority] = useState(0);
+
+    const [allDueDate, setAllDueDate] = useState(0);
+
     function filterAndSetTasks(tasks) {
         setTasks(tasks);
         setBacklog(tasks.filter(task => task.section === "Backlog"));
@@ -22,7 +29,11 @@ const TaskProvider = ({ children }) => {
         setInProgress(tasks.filter(task => task.section === "In Progress"));
         setDone(tasks.filter(task => task.section === "Done"));
 
-        // console.log(backlog);
+        setLowPriority(tasks.filter(task => task.priority === "LOW PRIORITY").length);
+        setModeratePriority(tasks.filter(task => task.priority === "MODERATE PRIORITY").length);
+        setHighPriority(tasks.filter(task => task.priority === "HIGH PRIORITY").length);
+
+        setAllDueDate(tasks.filter(task => task.due_date !== null).length);
     }
 
     async function getAllTasks() {
@@ -34,17 +45,12 @@ const TaskProvider = ({ children }) => {
                         Authorization: `Bearer ${token}`
                     }
                 });
-            // console.log(data);
             filterAndSetTasks(data);
-
             setLoading(false);
-
-            // console.log(data.user);
         } catch (error) {
             return "err";
         }
     }
-
 
     async function addTask(title, dueDate, selectedPriority, todos) {
         setLoading(true);
@@ -56,14 +62,33 @@ const TaskProvider = ({ children }) => {
                 selectedPriority,
                 todos
             },
-            {
-                headers: {
-                    Authorization: 'Bearer ' + token
-                },
-            } 
+                {
+                    headers: {
+                        Authorization: 'Bearer ' + token
+                    },
+                }
             );
             console.log(data);
             setLoading(false);
+        } catch (error) {
+            return "err";
+        }
+    }
+
+    async function deleteTask(taskId) {
+        setLoading(true);
+        console.log(token)
+        try {
+            var { data } = await axios.delete(`${url}/tasks/${taskId}`,
+                {
+                    headers: {
+                        Authorization: 'Bearer ' + token
+                    },
+                }
+            );
+            console.log(data);
+            setLoading(false);
+            return toast.success("Task deleted successfully !");
         } catch (error) {
             return "err";
         }
@@ -82,8 +107,13 @@ const TaskProvider = ({ children }) => {
             todo,
             inProgress,
             done,
+            lowPriority,
+            highPriority,
+            moderatePriority,
+            allDueDate,
             getAllTasks,
             addTask,
+            deleteTask,
         }),
         [getAllTasks] // eslint-disable-line react-hooks/exhaustive-deps
     );

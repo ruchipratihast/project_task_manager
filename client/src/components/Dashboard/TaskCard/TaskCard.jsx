@@ -4,7 +4,7 @@ import { PiCaretDown, PiCaretUp } from "react-icons/pi";
 import { TfiMoreAlt } from "react-icons/tfi";
 import More from '../../ReactModals/More/More';
 
-export default function TaskCard({ title, priority, section, date, todos }) {
+export default function TaskCard({ id, title, priority, section, date, todos }) {
 
     const [isPastDue, setIsPastDue] = useState(false);
     const [isMore, setIsMore] = useState(false);
@@ -18,9 +18,9 @@ export default function TaskCard({ title, priority, section, date, todos }) {
     useEffect(() => {
         const now = new Date();
         const dueDateObj = new Date(date);
-     
+
         setIsPastDue(dueDateObj < now);
-      }, []);
+    }, []);
 
     const formatDueDate = (dueDate) => {
         // Create a new Date object from the ISO 8601 string
@@ -51,37 +51,38 @@ export default function TaskCard({ title, priority, section, date, todos }) {
                     <div className={styles.priorityName}>{priority}</div>
                 </div>
                 <TfiMoreAlt onClick={() => setIsMore(true)} className={styles.moreButton} />
-                {isMore ? <More closeMore = {setIsMore} /> : <></>}
+                {isMore ? <More closeMore={setIsMore} id={id} /> : <></>}
             </div>
 
             <p className={styles.titleName}>{title}</p>
 
             <div className={styles.checkListHeader}>
-                <p className={styles.checklistName}>Checklist {todos.filter((t) => t.checked == true).length}/{todos.length}</p>
+                <p className={styles.checklistName}>Checklist {todos.filter((t) => t.completed == true).length}/{todos.length}</p>
                 <div onClick={() => setIsExpanded(!isExpanded)} className={styles.collapseButton}>
                     {isExpanded ? <PiCaretDown className={styles.collapseIcon} /> : <PiCaretUp className={styles.collapseIcon} />}
                 </div>
             </div>
             {isExpanded && todos.map((todo, idx) => {
                 return <div key={idx} className={styles.todoItem}>
-                    <input 
-                    type="checkbox" 
-                    checked={todo.completed} 
-                    // style={{ 
-                    //     backgroundColor: todo.completed? '#17A2B8' : 'transparent' 
-                    //   }}
-                    disabled />
+                    <input
+                        type="checkbox"
+                        checked={todo.completed}
+                        // style={{ 
+                        //     backgroundColor: todo.completed? '#17A2B8' : 'transparent' 
+                        //   }}
+                        disabled />
                     <p>{todo.todo}</p>
                 </div>
             })}
 
             <div className={styles.dateAndSection}>
-                {date ? <div 
-                        className={`${styles.dueDateContainer} ${isPastDue ? styles.isPastDue : ""
-                    }`}
-                        >
+                {date ? <div
+                    className={`${styles.dueDateContainer} ${isPastDue ? styles.isPastDue : ""
+                        } ${section == "Done" ? styles.isDone : ""
+                        }`}
+                >
                     {formatDueDate(date)}
-                    </div> : <p></p>}
+                </div> : <p></p>}
                 <div className={styles.sectionContainer}>
                     <div className={styles.sectionButton}><p className={styles.sectionName}>PROGRESS</p></div>
                     <div className={styles.sectionButton}><p className={styles.sectionName}>TODO</p></div>
