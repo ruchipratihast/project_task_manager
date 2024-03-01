@@ -1,25 +1,24 @@
-
 const { Task } = require("../../models/taskModel");
+const { Todo } = require("../../models/todoModel");
 
 module.exports = [
     async (req, res) => {
+        const taskId = req.params.taskId;
+        console.log(taskId)
         try {
-            const taskId = req.params.taskId;
+            const deletedTask = await Task.findByIdAndDelete({ _id: taskId });
+            console.log(deletedTask)
 
-            // Find the task by ID and delete it
-            const deletedTask = await Task.findByIdAndDelete(taskId);
-    
             if (!deletedTask) {
-                return res.status(404).json({message: 'Task not found'});
+                return res.status(404).json({ message: 'Task not found' });
             }
-    
-            return res.status(200).json({
-                message: "Task Delted successfully",
-                user: deletedTask,
-            });
-        } catch (error) {
-            console.error('Error deleting task:', error);
-            return res.status(500).json({message: 'Internal server error'});
+
+            // Delete todo also
+            await Todo.deleteMany({ taskRef: { $in: taskId } });
+
+            return res.status(200).json({ message: "Task deleted successfully" });
+        } catch (err) {
+            return res.status(500).json({ message: "Internal server error" });
         }
     }
 ]

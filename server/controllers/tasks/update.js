@@ -10,13 +10,13 @@ module.exports = [
     body("todos").notEmpty().withMessage("Atleast one todo is required"),
 
     async (req, res) => {
-        const  taskId  = req.params.taskId;
-        const { title, selectedPriority, dueDate, todos } = req.body;
+        const taskId = req.params.taskId;
+        const { title, priority, due_date, section, todos } = req.body;
 
         try {
             const updatedTask = await Task.findByIdAndUpdate(
                 taskId,
-                { $set: { title, selectedPriority, dueDate } },
+                { $set: { title, priority, due_date, section } },
                 { new: true }
             );
 
@@ -27,28 +27,37 @@ module.exports = [
             // Update todo
             for (const todoData of todos) {
                 try {
+                    // if todo is not exist in Task
+                    console.log(todoData._id)
+                    const existingTodo = await Todo.findById(todoData._id);
+                    if (!existingTodo) {
+                        const todo = new Todo({
+                            taskRef: taskId,
+                            todo: todoData.todo,
+                            completed: todoData.completed,
+                        });
+                        await todo.save();
+                    }
+
                     const updatedTodo = await Todo.findOneAndUpdate(
                         { _id: todoData._id, "taskRef": taskId },
                         {
                             $set: {
-                                todo: todoData.name,
-                                completed: todoData.checked,
+                                todo: todoData.todo,
+                                completed: todoData.completed,
                             }
                         },
                         { new: true }
                     );
 
-                    if (!updatedTodo) {
-                        throw new Error("Todo not found");
-                    }
                 }
                 catch (err) {
                     console.log(err);
                 }
             }
-           return res.status(200).json(updatedTask);
+            return res.status(200).json({message: updatedTask});
         } catch (err) {
-           return res.status(500).json({ message: "Internal server error" });
+            return res.status(500).json({ message: "Internal server error" });
         }
     },
 ];
