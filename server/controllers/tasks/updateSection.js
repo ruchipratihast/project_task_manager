@@ -18,8 +18,8 @@ module.exports = [
             if (!updatedTask) {
                 return res.status(404).json({ message: 'Task not found' });
             }
-            
-            return res.status(200).json({message: updatedTask});
+
+            return res.status(200).json({ message: updatedTask });
         } catch (err) {
             return res.status(500).json({ message: "Internal server error" });
         }

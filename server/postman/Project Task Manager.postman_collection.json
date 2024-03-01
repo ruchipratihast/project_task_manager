@@ -1,13 +1,103 @@
 {
 	"info": {
-		"_postman_id": "32ab5cd7-e9d6-483b-b0fb-c9c40772944a",
+		"_postman_id": "a0afbb6c-7a01-4d00-9b69-8e48850f768c",
 		"name": "Project Task Manager",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "auth",
-			"item": []
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"user@gmail.com\",\r\n    \"name\" : \"new user\",\r\n    \"password\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/register",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"t@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/login",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newName\":\"test\", \r\n    \"oldPassword\": \"12345\", \r\n    \"newPassword\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/update/65daf8e155a1297cfb1c7a70",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"update",
+								"65daf8e155a1297cfb1c7a70"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Task",
@@ -15,11 +105,21 @@
 				{
 					"name": "Add",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Task With Todos 2\",\r\n    \"selectedPriority\": \"HIGH PRIORITY\",\r\n    \"dueDate\": null,\r\n    \"todos\": [\r\n        {\r\n            \"name\": \"asdasdasdasdasd\",\r\n            \"checked\": false\r\n        },\r\n        {\r\n            \"name\": \"asd\",\r\n            \"checked\": false\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"title\": \"Deleting Task\",\r\n    \"selectedPriority\": \"HIGH PRIORITY\",\r\n    \"dueDate\": null,\r\n    \"todos\": [\r\n        {\r\n            \"name\": \"Deleteing todo1\",\r\n            \"checked\": true\r\n        },\r\n        {\r\n            \"name\": \"Deleteing todo2\",\r\n            \"checked\": false\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,6 +141,16 @@
 				{
 					"name": "Get",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -50,6 +160,164 @@
 							],
 							"path": [
 								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/tasks/65dc6e2d94fb0f184b63c048",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"tasks",
+								"65dc6e2d94fb0f184b63c048"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/tasks/65df8ff4a8d9ee9b6ddaf138",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"tasks",
+								"65df8ff4a8d9ee9b6ddaf138"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Updated Task\",\r\n    \"priority\": \"HIGH PRIORITY\",\r\n    \"due_date\": \"2024-02-28T18:30:00.000Z\",\r\n    \"section\": \"Backlog\",\r\n    \"todos\": [\r\n        {   \"_id\": \"65e04f1a74cfae94d6f06d62\",\r\n            \"name\": \"old updated todo1\",\r\n            \"checked\": true\r\n        },\r\n        {   \r\n            \"name\": \"New updated todo2\",\r\n            \"checked\": false\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/tasks/65dc6e2d94fb0f184b63c048",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"tasks",
+								"65dc6e2d94fb0f184b63c048"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit-section",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"section\" : \"Todo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/tasks-section/65df648473499624fe732c2f",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"tasks-section",
+								"65df648473499624fe732c2f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-filter-task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/tasks/thisMonth",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"tasks",
+								"thisMonth"
 							]
 						}
 					},
@@ -81,12 +349,12 @@
 	"variable": [
 		{
 			"key": "base",
-			"value": "",
+			"value": "http://localhost:8000/api/v1",
 			"type": "default"
 		},
 		{
 			"key": "token",
-			"value": "",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWRhZjhlMTU1YTEyOTdjZmIxYzdhNzAiLCJpYXQiOjE3MDkwNTE2NTN9.GXW9RAvntKyp-TLx_KToStS7wAnwiZy4hM0AgVVo_l4",
 			"type": "default"
 		}
 	]

@@ -36,7 +36,7 @@ module.exports = [
             return res.status(200).json({
                 message: "User registered successfully",
                 token: token,
-                name: name,
+                user: userResponse,
             });
 
         }

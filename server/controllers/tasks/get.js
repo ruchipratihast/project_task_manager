@@ -4,7 +4,7 @@ const { Todo } = require("../../models/todoModel");
 module.exports = [
     async (req, res) => {
         try {
-            const tasks = await Task.find();
+            const tasks = await Task.find({ user: req.userId, });
             let alldata = [];
             for (let task of tasks) {
                 let alltodos = await Todo.find({ taskRef: task._id });

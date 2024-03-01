@@ -14,6 +14,7 @@ module.exports = [
 
         const task = new Task(
             {
+                user: req.userId,
                 title,
                 priority: selectedPriority,
                 due_date: dueDate,

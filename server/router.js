@@ -15,6 +15,7 @@ Router.post("/login", require("./controllers/auth/login"));
 Router.put("/update/:userId", verifyJwt, require("./controllers/auth/update"));
 
 //task route
+Router.get("/tasks/:id", require("./controllers/tasks/get_by_id"));
 Router.get("/tasks", verifyJwt, require("./controllers/tasks/get"));
 Router.get("/tasks/:filter", verifyJwt, require("./controllers/tasks/filterTask"));
 Router.post("/tasks", verifyJwt, require("./controllers/tasks/create"));
