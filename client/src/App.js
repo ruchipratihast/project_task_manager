@@ -8,6 +8,7 @@ import AnalyticsPage from './pages/Dashboard/AnalyticsPage';
 import SettingsPage from './pages/Dashboard/SettingsPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PublicPage from './pages/PublicPage/PublicPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <AuthProvider key='authprovider'>
         <BrowserRouter>
           <Routes>
+            <Route path='/task' element={<PublicPage />} />
             <Route path='/register' element={<RegisterPage />} />
             <Route path='/login' element={<LoginPage />} />
 

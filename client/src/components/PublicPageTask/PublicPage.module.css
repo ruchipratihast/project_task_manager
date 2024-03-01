@@ -1,0 +1,82 @@
+.card {
+    width: 500px;
+    height: 380px;
+    background-color: #fff;
+    border: 1.5px solid var(--list-color);
+    border-radius: 12px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.priorityDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.priorityName {
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--md-grey-color);
+}
+
+.titleName {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.checklistName {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.todoItem>p {
+    margin-left: 8px;
+
+}
+
+.todoContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.todoItem {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    border-radius: 12px;
+    border: 1px solid var(--section-bg-color);
+    font-weight: 400;
+    padding: 6px 10px;
+}
+
+.dateAndSection {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.dueDate{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.isPastDue {
+    border-radius: 6px;
+    font-size: 12px;
+    padding: 4px;
+    margin-left: 6px;
+    background-color: var(--dark-red-color);
+    color: white;
+}
+
+@media screen and (max-width:647px) {
+    .card {
+        width: 100vw;
+        height: 400px;
+    }
+}

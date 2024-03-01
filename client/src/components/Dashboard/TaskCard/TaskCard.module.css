@@ -112,13 +112,19 @@
     padding: 4px 8px 4px 8px;
     font-size: 13px;
     border-radius: 6px;
+    border: none;
     text-align: center;
     margin-left: 6px;
     cursor: pointer;
 }
 
 .sectionName {
-    color: var(--light-grey-color);
+    color: var(--md-grey-color);
     font-size: 10px;
     font-weight: 500;
 }
+
+.sectionButton:hover {
+    background-color: var(--list-color);
+  }
+

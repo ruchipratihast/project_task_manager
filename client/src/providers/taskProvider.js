@@ -36,10 +36,48 @@ const TaskProvider = ({ children }) => {
         setAllDueDate(tasks.filter(task => task.due_date !== null).length);
     }
 
+    async function changeSection(id, sectionName) {
+        console.log("Change Section");
+        console.log(id, sectionName)
+        setLoading(true);
+        try {
+            var { data } = await axios.put(`${url}/tasks-section/${id}`,
+                {"section": sectionName},
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+            console.log(data)
+            filterAndSetTasks(data);
+            setLoading(false);
+            toast.success("Task's section updated successfully !");
+        } catch (error) {
+            return "err";
+        }
+    }
+
     async function getAllTasks() {
         setLoading(true);
         try {
             var { data } = await axios.get(`${url}/tasks`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+            filterAndSetTasks(data);
+            setLoading(false);
+        } catch (error) {
+            return "err";
+        }
+    }
+
+    async function getFilteredTasks(filteredTask) {
+        setLoading(true);
+        console.log(filteredTask)
+        try {
+            var { data } = await axios.get(`${url}/tasks/${filteredTask}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -70,6 +108,34 @@ const TaskProvider = ({ children }) => {
             );
             console.log(data);
             setLoading(false);
+        } catch (error) {
+            return "err";
+        }
+    }
+
+    async function updateTask(id, title, priority, due_date, section, todos) {
+        console.log("Update Task from Provider")
+        console.log(section);
+        console.log(todos);
+        setLoading(true);
+        console.log(token)
+        try {
+            var { data } = await axios.put(`${url}/tasks/${id}`, {
+                title,
+                priority,
+                due_date,
+                section,
+                todos
+            },
+                {
+                    headers: {
+                        Authorization: 'Bearer ' + token
+                    },
+                }
+            );
+            console.log(data);
+            setLoading(false);
+            toast.success("Task updated successfully !");
         } catch (error) {
             return "err";
         }
@@ -112,8 +178,11 @@ const TaskProvider = ({ children }) => {
             moderatePriority,
             allDueDate,
             getAllTasks,
+            getFilteredTasks,
             addTask,
+            updateTask,
             deleteTask,
+            changeSection
         }),
         [getAllTasks] // eslint-disable-line react-hooks/exhaustive-deps
     );

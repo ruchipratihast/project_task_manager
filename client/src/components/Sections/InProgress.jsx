@@ -18,6 +18,7 @@ export default function InProgress() {
         {inProgress.map((task, idx) => {
           return <TaskCard
             key={idx}
+            id={task._id}
             title={task.title}
             priority={task.priority}
             section={task.section}

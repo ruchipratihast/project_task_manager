@@ -3,11 +3,14 @@ import styles from './TaskCard.module.css'
 import { PiCaretDown, PiCaretUp } from "react-icons/pi";
 import { TfiMoreAlt } from "react-icons/tfi";
 import More from '../../ReactModals/More/More';
+import { useTasks } from '../../../providers/taskProvider';
 
 export default function TaskCard({ id, title, priority, section, date, todos }) {
 
     const [isPastDue, setIsPastDue] = useState(false);
     const [isMore, setIsMore] = useState(false);
+
+    const { changeSection } = useTasks();
 
     const priorityColor = {
         'LOW PRIORITY': '#63C05B',
@@ -21,6 +24,10 @@ export default function TaskCard({ id, title, priority, section, date, todos }) 
 
         setIsPastDue(dueDateObj < now);
     }, []);
+
+    const handleChangeSection = async (section) => {
+        await changeSection(id, section);
+    }
 
     const formatDueDate = (dueDate) => {
         // Create a new Date object from the ISO 8601 string
@@ -51,7 +58,15 @@ export default function TaskCard({ id, title, priority, section, date, todos }) 
                     <div className={styles.priorityName}>{priority}</div>
                 </div>
                 <TfiMoreAlt onClick={() => setIsMore(true)} className={styles.moreButton} />
-                {isMore ? <More closeMore={setIsMore} id={id} /> : <></>}
+                {isMore ? <More
+                    closeMore={setIsMore}
+                    id={id}
+                    title={title}
+                    priority={priority}
+                    section={section}
+                    date={date}
+                    todos={todos}
+                /> : <></>}
             </div>
 
             <p className={styles.titleName}>{title}</p>
@@ -83,11 +98,55 @@ export default function TaskCard({ id, title, priority, section, date, todos }) 
                 >
                     {formatDueDate(date)}
                 </div> : <p></p>}
-                <div className={styles.sectionContainer}>
-                    <div className={styles.sectionButton}><p className={styles.sectionName}>PROGRESS</p></div>
-                    <div className={styles.sectionButton}><p className={styles.sectionName}>TODO</p></div>
-                    <div className={styles.sectionButton}><p className={styles.sectionName}>DONE</p></div>
-                </div>
+                {section == "Done" ?
+                    <div className={styles.sectionContainer}>
+                        <button onClick={() => handleChangeSection("Backlog")} className={styles.sectionButton}>
+                            <p className={styles.sectionName}>BACKLOG</p>
+                        </button>
+                        <button onClick={() => handleChangeSection("Todo")} className={styles.sectionButton}>
+                            <p className={styles.sectionName}>TO-DO</p>
+                        </button>
+                        <button onClick={() => handleChangeSection("In Progress")} className={styles.sectionButton}>
+                            <p className={styles.sectionName}>PROGRESS</p>
+                        </button>
+                    </div>
+                    : section == "In Progress" ?
+                        <div className={styles.sectionContainer}>
+                            <button onClick={() => handleChangeSection("Backlog")} className={styles.sectionButton}>
+                                <p className={styles.sectionName}>BACKLOG</p>
+                            </button>
+                            <button onClick={() => handleChangeSection("Todo")} className={styles.sectionButton}>
+                                <p className={styles.sectionName}>TO-DO</p>
+                            </button>
+                            <button onClick={() => handleChangeSection("Done")} className={styles.sectionButton}>
+                                <p className={styles.sectionName}>DONE</p>
+                            </button>
+                        </div>
+                        : section == "Todo" ?
+                            <bu className={styles.sectionContainer}>
+                                <button onClick={() => handleChangeSection("Backlog")} className={styles.sectionButton}>
+                                    <p className={styles.sectionName}>BACKLOG</p>
+                                </button>
+                                <button onClick={() => handleChangeSection("In Progress")} className={styles.sectionButton}>
+                                    <p className={styles.sectionName}>PROGRESS</p>
+                                </button>
+                                <button onClick={() => handleChangeSection("Done")} className={styles.sectionButton}>
+                                    <p className={styles.sectionName}>DONE</p>
+                                </button>
+                            </bu>
+                            :
+                            <div className={styles.sectionContainer}>
+                                <button onClick={() => handleChangeSection("In Progress")} className={styles.sectionButton}>
+                                    <p className={styles.sectionName}>PROGRESS</p>
+                                </button>
+                                <button onClick={() => handleChangeSection("Todo")} className={styles.sectionButton}>
+                                    <p className={styles.sectionName}>TO-DO</p>
+                                </button>
+                                <button onClick={() => handleChangeSection("Done")} className={styles.sectionButton}>
+                                    <p className={styles.sectionName}>DONE</p>
+                                </button>
+                            </div>
+                }
             </div>
 
         </div>
