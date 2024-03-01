@@ -4,6 +4,9 @@
     border-radius: 12px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     padding: 20px;
+    width: auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .priorityContainer {
@@ -32,6 +35,7 @@
     margin-top: 10px;
     font-size: 18px;
     font-weight: 700;
+    text-overflow: ellipsis;
 }
 
 .checkListHeader {
@@ -73,6 +77,15 @@
 .todoItem>p {
     margin-left: 8px;
 
+}
+
+.customCheckBox {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 20%;
+    margin-right: 8px;
+    text-align: center;
 }
 
 .dateAndSection {
@@ -126,5 +139,4 @@
 
 .sectionButton:hover {
     background-color: var(--list-color);
-  }
-
+}

@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 import styles from './Board.module.css'
 import Backlog from '../../Sections/Backlog';
 import Todo from '../../Sections/Todo';
@@ -16,7 +16,7 @@ export default function Dashboard() {
 
   const handleSelect = async (event) => {
     console.log(event.target.value)
-    await getFilteredTasks(event.target.value)
+    getFilteredTasks(event.target.value)
   };
 
   return (
@@ -30,10 +30,10 @@ export default function Dashboard() {
         <h1 className={styles.boardName}>Board</h1>
 
         <select className={styles.dropdownContainer} onChange={handleSelect} >
-        <option className={styles.dropdownContent} value="today">Today</option>
-        <option className={styles.dropdownContent} value="thisWeek">This Week</option>
-        <option className={styles.dropdownContent} value="thisMonth">This Month</option>
-      </select>
+          <option className={styles.dropdownContent} value="today">Today</option>
+          <option className={styles.dropdownContent} value="thisWeek">This Week</option>
+          <option className={styles.dropdownContent} value="thisMonth">This Month</option>
+        </select>
       </div>
 
       <div className={styles.sectionContainer}>

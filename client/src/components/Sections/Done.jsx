@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './CommonSection.module.css'
 import { VscCollapseAll } from "react-icons/vsc";
 import { useTasks } from '../../providers/taskProvider';
@@ -7,11 +7,13 @@ import TaskCard from '../Dashboard/TaskCard/TaskCard';
 export default function Done() {
   const { done } = useTasks();
 
+  const [globalCollapse, setGlobalCollapse] = useState(false);
+
   return (
     <div className={styles.container}>
       <div className={styles.headingContainer}>
         <h1 className={styles.sectionName} >Done</h1>
-        <VscCollapseAll className={styles.collapseIcon} />
+        <VscCollapseAll onClick={() => setGlobalCollapse(!globalCollapse)} className={styles.collapseIcon} />
       </div>
 
       <div style={{ overflowY: 'auto', maxHeight: '72vh' }}>
@@ -19,6 +21,7 @@ export default function Done() {
           return <TaskCard
             key={idx}
             id={task._id}
+            globalCollapse={globalCollapse}
             title={task.title}
             priority={task.priority}
             section={task.section}

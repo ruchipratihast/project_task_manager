@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import styles from './TaskCard.module.css'
-import { PiCaretDown, PiCaretUp } from "react-icons/pi";
+import { PiCaretDown, PiCaretUp, PiCheckBold } from "react-icons/pi";
 import { TfiMoreAlt } from "react-icons/tfi";
+import styles from './TaskCard.module.css'
 import More from '../../ReactModals/More/More';
 import { useTasks } from '../../../providers/taskProvider';
+import Modal from 'react-modal';
+import { Popover } from 'react-tiny-popover'
+import MorePopup from './MorePopup';
 
-export default function TaskCard({ id, title, priority, section, date, todos }) {
+
+export default function TaskCard({ id, globalCollapse, title, priority, section, date, todos }) {
+
 
     const [isPastDue, setIsPastDue] = useState(false);
     const [isMore, setIsMore] = useState(false);
+    const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
 
     const { changeSection } = useTasks();
 
@@ -44,7 +51,16 @@ export default function TaskCard({ id, title, priority, section, date, todos }) 
         return `${month} ${day}${suffix}`;
 
     }
+
     const [isExpanded, setIsExpanded] = useState(false);
+
+
+    useEffect(() => {
+        if (globalCollapse) {
+            setIsExpanded(false);
+        }
+        console.log("global collable");
+    }, [globalCollapse])
 
     return (
         <div className={styles.card}>
@@ -57,16 +73,15 @@ export default function TaskCard({ id, title, priority, section, date, todos }) 
                     ></span>
                     <div className={styles.priorityName}>{priority}</div>
                 </div>
-                <TfiMoreAlt onClick={() => setIsMore(true)} className={styles.moreButton} />
-                {isMore ? <More
-                    closeMore={setIsMore}
+
+                <MorePopup
                     id={id}
                     title={title}
                     priority={priority}
                     section={section}
                     date={date}
                     todos={todos}
-                /> : <></>}
+                />
             </div>
 
             <p className={styles.titleName}>{title}</p>
@@ -79,14 +94,16 @@ export default function TaskCard({ id, title, priority, section, date, todos }) 
             </div>
             {isExpanded && todos.map((todo, idx) => {
                 return <div key={idx} className={styles.todoItem}>
-                    <input
-                        type="checkbox"
-                        checked={todo.completed}
-                        // style={{ 
-                        //     backgroundColor: todo.completed? '#17A2B8' : 'transparent' 
-                        //   }}
-                        disabled />
-                    <p>{todo.todo}</p>
+
+                    <div style={{ display: 'flex' }}>
+                        <div style={{
+                            backgroundColor: todo.completed ? '#17A2B8' : 'white',
+                            border: todo.completed ? 'none' : '1px solid black',
+                        }} className={styles.customCheckBox}>
+                            <PiCheckBold color='white' />
+                        </div>
+                        <p>{todo.todo}</p>
+                    </div>
                 </div>
             })}
 
@@ -146,7 +163,7 @@ export default function TaskCard({ id, title, priority, section, date, todos }) 
                                     <p className={styles.sectionName}>DONE</p>
                                 </button>
                             </div>
-                }
+                     }
             </div>
 
         </div>

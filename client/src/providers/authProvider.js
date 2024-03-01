@@ -32,14 +32,14 @@ const AuthProvider = ({ children }) => {
             });
             axios.defaults.headers.common["Authorization"] = "Bearer " + token;
             setLogged(true);
+            console.log(data);
             setToken(data.token);
             setLoading(false);
             setUser(data.user);
             localStorage.setItem("user", JSON.stringify(data.user));
             toast.success("User registered successfully !");
         } catch (error) {
-            if(error.response.status == 409)
-            { 
+            if (error.response.status === 409) {
                 return toast.error("User Already Exist !");
             }
             return error;
@@ -74,8 +74,8 @@ const AuthProvider = ({ children }) => {
 
         try {
             var { data } = await axios.put(`${url}/update/${userId}`, {
-                "newName": newName, 
-                "oldPassword": oldPassword, 
+                "newName": newName,
+                "oldPassword": oldPassword,
                 "newPassword": newPassword,
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -83,14 +83,12 @@ const AuthProvider = ({ children }) => {
             });
             console.log(data);
             return toast.success("Updated successfully !");
-         
+
         } catch (error) {
-            if(error.response.status == 400)
-            { 
+            if (error.response.status === 400) {
                 return toast.error("Incorrect old password !");
             }
-            if(error.response.status == 400)
-            { 
+            if (error.response.status === 400) {
                 return toast.error("Incorrect old password !");
             }
             console.log(error)
@@ -119,7 +117,6 @@ const AuthProvider = ({ children }) => {
 
             // set user too
             setUser(JSON.parse(localStorage.getItem("user")));
-            setUser(localStorage.getItem("user"));
         } else {
             setLogged(false);
             setLoading(false);

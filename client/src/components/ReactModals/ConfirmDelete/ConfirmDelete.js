@@ -8,7 +8,7 @@ export default function ConfirmDelete({ closeMore, closeDelete, id }) {
     const handleSubmit = async () => {
         await deleteTask(id);
         closeDelete(false);
-        closeMore(false);
+        // closeMore(false);
     };
 
     return (

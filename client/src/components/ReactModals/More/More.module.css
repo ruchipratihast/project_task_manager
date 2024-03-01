@@ -1,53 +1,55 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+ .modalBackground {
+     /* position: absolute; */
+     /* top: 20%;
+     left: 50%; */
+     /* bottom: -10%; */
+     justify-content: center;
+     align-items: center;
+     z-index: 1;
+ }
 
-.modalBackground {
-    position: relative;
-    top: 31%;
-    left: 47%;
-    position: fixed;
-    display: fixed;
-    justify-content: center;
-    align-items: center;
-}
+ .modalContainer {
+     width: 195px;
+     height: 140px;
+     border-radius: 12px;
+     background-color: white;
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     align-items: start;
+     padding: 25px;
+ }
 
-.modalContainer {
-    width: 195px;
-    height: 140px;
-    border-radius: 12px;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
-    padding: 25px;
-}
+ .rowContainer {
+     display: flex;
+     justify-content: space-between;
+ }
 
-.rowContainer{
-    display: flex;
-    justify-content: space-between;
-}
+ .actionButton {
+     background-color: transparent;
+     border: transparent;
+ }
 
-.actionButton{
-    background-color: transparent;
-    border: transparent;
-}
+ .crossButton {
+     margin-left: 7rem;
+ }
 
-.crossButton{
-    margin-left: 7rem;
-}
+ .actionName {
+     font-size: 14px;
+     font-weight: 500;
+ }
 
-.actionName{
-    font-size: 14px;
-    font-weight: 500; 
-}
+ .delete {
+     font-size: 14px;
+     font-weight: 500;
+     color: var(--dark-red-color);
+ }
 
-.delete{
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--dark-red-color);
-}
+ .ReactModal__Content,
+ .ReactModal__Content--after-open {
+     border: none;
+     background-color: none;
+     box-shadow: none;
+     overflow: hidden;
+ }

@@ -8,7 +8,6 @@ const TaskContext = createContext();
 
 const TaskProvider = ({ children }) => {
     const [tasks, setTasks] = useState([]);
-    const [loading, setLoading] = useState(true);
     const { token } = useAuth();
 
     const [backlog, setBacklog] = useState([]);
@@ -23,6 +22,15 @@ const TaskProvider = ({ children }) => {
     const [allDueDate, setAllDueDate] = useState(0);
 
     function filterAndSetTasks(tasks) {
+
+        // reset all 
+        setTasks([]);
+        setBacklog([]);
+        setTodo([]);
+        setInProgress([]);
+        setDone([]);
+
+
         setTasks(tasks);
         setBacklog(tasks.filter(task => task.section === "Backlog"));
         setTodo(tasks.filter(task => task.section === "Todo"));
@@ -39,18 +47,17 @@ const TaskProvider = ({ children }) => {
     async function changeSection(id, sectionName) {
         console.log("Change Section");
         console.log(id, sectionName)
-        setLoading(true);
         try {
             var { data } = await axios.put(`${url}/tasks-section/${id}`,
-                {"section": sectionName},
+                { "section": sectionName },
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
             console.log(data)
-            filterAndSetTasks(data);
-            setLoading(false);
+            // filterAndSetTasks(data);
+            getAllTasks();
             toast.success("Task's section updated successfully !");
         } catch (error) {
             return "err";
@@ -58,7 +65,8 @@ const TaskProvider = ({ children }) => {
     }
 
     async function getAllTasks() {
-        setLoading(true);
+        console.log("Get All Tasks from Provider")
+        // setLoading(true);
         try {
             var { data } = await axios.get(`${url}/tasks`,
                 {
@@ -67,31 +75,33 @@ const TaskProvider = ({ children }) => {
                     }
                 });
             filterAndSetTasks(data);
-            setLoading(false);
+            // setLoading(false);
         } catch (error) {
             return "err";
         }
     }
 
     async function getFilteredTasks(filteredTask) {
-        setLoading(true);
         console.log(filteredTask)
+        console.log("CALL")
         try {
             var { data } = await axios.get(`${url}/tasks/${filteredTask}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
-                });
+                }
+            );
+            console.log(data);
+
             filterAndSetTasks(data);
-            setLoading(false);
         } catch (error) {
+            console.log(error);
             return "err";
         }
     }
 
     async function addTask(title, dueDate, selectedPriority, todos) {
-        setLoading(true);
         console.log(token)
         try {
             var { data } = await axios.post(`${url}/tasks`, {
@@ -106,8 +116,8 @@ const TaskProvider = ({ children }) => {
                     },
                 }
             );
+            getAllTasks();
             console.log(data);
-            setLoading(false);
         } catch (error) {
             return "err";
         }
@@ -117,7 +127,6 @@ const TaskProvider = ({ children }) => {
         console.log("Update Task from Provider")
         console.log(section);
         console.log(todos);
-        setLoading(true);
         console.log(token)
         try {
             var { data } = await axios.put(`${url}/tasks/${id}`, {
@@ -134,7 +143,7 @@ const TaskProvider = ({ children }) => {
                 }
             );
             console.log(data);
-            setLoading(false);
+            getAllTasks();
             toast.success("Task updated successfully !");
         } catch (error) {
             return "err";
@@ -142,7 +151,6 @@ const TaskProvider = ({ children }) => {
     }
 
     async function deleteTask(taskId) {
-        setLoading(true);
         console.log(token)
         try {
             var { data } = await axios.delete(`${url}/tasks/${taskId}`,
@@ -153,7 +161,7 @@ const TaskProvider = ({ children }) => {
                 }
             );
             console.log(data);
-            setLoading(false);
+            getAllTasks();
             return toast.success("Task deleted successfully !");
         } catch (error) {
             return "err";
@@ -167,7 +175,6 @@ const TaskProvider = ({ children }) => {
     // Memoized value of the authentication context
     const contextValue = useMemo(
         () => ({
-            loading,
             tasks,
             backlog,
             todo,
@@ -177,14 +184,13 @@ const TaskProvider = ({ children }) => {
             highPriority,
             moderatePriority,
             allDueDate,
-            getAllTasks,
             getFilteredTasks,
             addTask,
             updateTask,
             deleteTask,
             changeSection
         }),
-        [getAllTasks] // eslint-disable-line react-hooks/exhaustive-deps
+        [todo, addTask, updateTask, getFilteredTasks, deleteTask] // eslint-disable-line react-hooks/exhaustive-deps
     );
 
     return (

@@ -1,6 +1,7 @@
 .card {
-    width: 500px;
-    height: 380px;
+    min-width: 500px;
+    max-width: 500px;
+    height: 50vh;
     background-color: #fff;
     border: 1.5px solid var(--list-color);
     border-radius: 12px;
@@ -32,15 +33,31 @@
     font-size: 16px;
     font-weight: 500;
 }
+
 .todoItem>p {
     margin-left: 8px;
 
 }
 
-.todoContainer{
+.todoContainer {
+    height: 30vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    overflow-y: auto;
+}
+
+.customCheckBox {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 20%;
+    margin-right: 8px;
+    text-align: center;
+}
+
+.todoContainer {
+    display: flex;
+    flex-direction: column;
 }
 
 .todoItem {
@@ -60,7 +77,7 @@
     margin-top: 16px;
 }
 
-.dueDate{
+.dueDate {
     font-size: 14px;
     font-weight: 500;
 }

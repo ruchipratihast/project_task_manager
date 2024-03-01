@@ -10,7 +10,7 @@ export default function Settings() {
     const [showOldPassword, setShowOldPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
 
-    const {user, updateSetting } = useAuth();
+    const { user, updateSetting } = useAuth();
 
     const [data, setData] = useState({
         name: user.name,
@@ -35,8 +35,8 @@ export default function Settings() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if(data.oldPassword != ""){
-            if(data.newPassword == "") {
+        if (data.oldPassword != "") {
+            if (data.newPassword == "") {
                 return toast.error("Please enter new Password!");
             }
         }
@@ -52,6 +52,7 @@ export default function Settings() {
                 <div className={styles.inputContainer}>
                     <FaRegUser className={styles.prefixicon} />
                     <input
+                        defaultValue={user.name}
                         className={styles.inputField}
                         type="text"
                         name='name'

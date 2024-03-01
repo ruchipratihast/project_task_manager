@@ -2,9 +2,9 @@ import { React, useEffect, useState } from 'react';
 import styles from '../AddTodo/AddTodo.module.css';
 import deleteicon from "../../../assets/icons/Delete.png";
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import { useTasks } from '../../../providers/taskProvider';
 import { toast } from 'react-toastify';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function UpdateTask({ closeUpdate, taskId, oldTitle, OldPriority, oldSection, oldDate, oldTodos }) {
     const [title, setTitle] = useState(oldTitle);
@@ -15,10 +15,6 @@ export default function UpdateTask({ closeUpdate, taskId, oldTitle, OldPriority,
     const [todos, setTodos] = useState(oldTodos);
 
     const { updateTask } = useTasks();
-
-    useEffect(()=>{
-        console.log(taskId);
-    })
 
     const updateTodo = (index, id, todo, completed) => {
         if (index < 0 || index >= todos.length) {
@@ -59,7 +55,7 @@ export default function UpdateTask({ closeUpdate, taskId, oldTitle, OldPriority,
             return toast.error("Please select priority!");
         }
 
-        if (todos.length == 0 ) {
+        if (todos.length == 0) {
             return toast.error("Please add atleast one todo!");
         }
         if (todos[0].todo == "") {
@@ -77,7 +73,7 @@ export default function UpdateTask({ closeUpdate, taskId, oldTitle, OldPriority,
                     <input
                         className={styles.inputField}
                         type="text"
-                        name= {title}
+                        name={title}
                         value={title}
                         onChange={handleChange}
                         required={true}
@@ -135,13 +131,13 @@ export default function UpdateTask({ closeUpdate, taskId, oldTitle, OldPriority,
                                     <input
                                         type="checkbox"
                                         checked={todo.completed}
-                                        onChange={(e) => updateTodo(index,todo.id, todo.todo, e.target.checked)}
+                                        onChange={(e) => updateTodo(index, todo.id, todo.todo, e.target.checked)}
                                     />
                                     <input
                                         type="text"
-                                        name= {todo.todo}
+                                        name={todo.todo}
                                         value={todo.todo}
-                                        onChange={(e) => updateTodo(index,todo.id, e.target.value, todo.completed)}
+                                        onChange={(e) => updateTodo(index, todo.id, e.target.value, todo.completed)}
                                     />
                                     <span
                                         className={styles.deleteIcon}

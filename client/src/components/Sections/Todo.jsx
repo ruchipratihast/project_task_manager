@@ -11,6 +11,8 @@ export default function Todo() {
 
   const { todo } = useTasks();
 
+  const [globalCollapse, setGlobalCollapse] = useState(false);
+
   return (
     <div className={styles.container}>
       <div className={styles.headingContainer}>
@@ -24,7 +26,7 @@ export default function Todo() {
           >
             <IoMdAdd className={styles.collapseIcon} style={{ marginRight: '18px' }} />
           </button>
-          <VscCollapseAll className={styles.collapseIcon} />
+          <VscCollapseAll onClick={() => setGlobalCollapse(!globalCollapse)} className={styles.collapseIcon} />
         </div>
       </div>
       {openAddTodo ? <AddTodo closeModel={setOpenAddTodo} /> : <></>}
@@ -34,6 +36,7 @@ export default function Todo() {
           return <TaskCard
             key={i}
             id={task._id}
+            globalCollapse={globalCollapse}
             title={task.title}
             priority={task.priority}
             section={task.section}

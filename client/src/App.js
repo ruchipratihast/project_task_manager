@@ -27,11 +27,12 @@ function App() {
               <Route path='/analytics' element={<AnalyticsPage />} />
               <Route path='/setting' element={<SettingsPage />} />
 
+              <Route path='/tasks/:id' element={<PublicPage />} />
             </Route>
 
           </Routes>
         </BrowserRouter>
-      <ToastContainer />
+        <ToastContainer />
       </AuthProvider>
     </>
   );
